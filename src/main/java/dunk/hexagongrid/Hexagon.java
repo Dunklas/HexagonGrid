@@ -11,7 +11,7 @@ public interface Hexagon {
 	
 	Coordinate 			getCoordinate();
 	Collection<Point> 	getPoints(GridLayout layout);
-	Point				getCenter(GridLayout layout);
+	Point				getCenterPoint(GridLayout layout);
 	Vertice 			getVertice(Vertice.Type direction);
 	Collection<Vertice> getVertices(); // Returns COPY to avoid modification
 	Edge 				getEdge(Edge.Type direction);

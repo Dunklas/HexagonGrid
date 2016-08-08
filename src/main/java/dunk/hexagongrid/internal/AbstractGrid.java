@@ -75,7 +75,7 @@ abstract class AbstractGrid implements Grid {
 		try {
 			return getHexagon(finalCoord);
 		} catch (HexagonOutOfBoundsException hoobe) {
-			throw new AlienHexagonException("Point pixel not within grid");
+			throw new AlienHexagonException("Point: " + pixel + "not within grid");
 		}
 	}
 

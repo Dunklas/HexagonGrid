@@ -54,14 +54,14 @@ abstract class AbstractHexagon implements Hexagon {
 		if (layout == null) throw new NullPointerException();
 		if (corner < 0 || corner > 5) throw new IllegalArgumentException();
 		
-		Point center = getCenter(layout);
+		Point center = getCenterPoint(layout);
 		Point offset = getHexCornerOffset(layout, corner);
 		return new Point(center.getX() + offset.getX(),
 						 center.getY() + offset.getY());
 	}
 	
 	@Override
-	public Point getCenter(GridLayout layout) {
+	public Point getCenterPoint(GridLayout layout) {
 		if (layout == null) throw new NullPointerException();
 		
 		HexagonOrientation o = this.orientation;
