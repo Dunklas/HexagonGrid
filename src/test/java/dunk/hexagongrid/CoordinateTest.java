@@ -41,10 +41,15 @@ public class CoordinateTest {
 		int x = 2;
 		int y = -3;
 		int z = -x-y;
-		Coordinate c1 = Coordinate.from(x, y);
 		
+		Coordinate c1 = Coordinate.from(x, y);
 		assertEquals(x, c1.getX());
 		assertEquals(y, c1.getY());
 		assertEquals(z, c1.getZ());
+		
+		Coordinate c2 = Coordinate.from(x, y, z);
+		assertEquals(x, c2.getX());
+		assertEquals(y, c2.getY());
+		assertEquals(z, c2.getZ());
 	}
 }

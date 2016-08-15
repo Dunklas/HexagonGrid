@@ -22,10 +22,10 @@ public final class Point {
 		return new Point(x, y);
 	}
 	
-	public long getX() { 
-		return Math.round(x);
+	public double getX() { 
+		return x;
 	}
-	public long getY() { 
-		return Math.round(y);
+	public double getY() { 
+		return y;
 	}
 }

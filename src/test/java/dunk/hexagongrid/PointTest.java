@@ -8,11 +8,11 @@ public class PointTest {
 
 	@Test
 	public void creationOfPoint() {
-		final long x = 8;
-		final long y = 16;
+		final double x = 8;
+		final double y = 16;
 		Point p = new Point(8, 16);
-		assertEquals("X should equal X", x, p.getX());
-		assertEquals("Y should equal Y", y, p.getY());
+		assertEquals(x, p.getX(), 0.001);
+		assertEquals(y, p.getY(), 0.001);
 	}
 	
 	@Test
@@ -21,8 +21,8 @@ public class PointTest {
 		Point p2 = new Point(3, -6);
 		Point center = new Point(1, -2);
 		Point calculatedCenter = Point.centerOf(p1, p2);
-		assertEquals("calculatedCenter should be equal to center", center.getX(), calculatedCenter.getX());
-		assertEquals("calculatedCenter should be equal to center", center.getY(), calculatedCenter.getY());
+		assertEquals(center.getX(), calculatedCenter.getX(), 0.001);
+		assertEquals(center.getY(), calculatedCenter.getY(), 0.001);
 	}
 	
 	@Test
@@ -33,6 +33,6 @@ public class PointTest {
 		assertEquals("distance between p1 and p2 should be equal to distance between p2 and p1",
 				p1.distanceTo(p2),
 				p2.distanceTo(p1),
-				0);
+				0.001);
 	}
 }
