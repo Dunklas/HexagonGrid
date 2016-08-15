@@ -35,6 +35,8 @@ abstract class AbstractEdge implements Edge {
 		
 	@Override
 	public Point getCenterPoint(GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
 		Point p1 = getFirstPoint(layout);
 		Point p2 = getSecondPoint(layout);
 		return Point.centerOf(p1, p2);

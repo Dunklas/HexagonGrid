@@ -1,5 +1,9 @@
 package dunk.hexagongrid;
 
+/**
+ * Represents the coordinate of a {@link Hexagon} in a {@link Grid}
+ * This implementation of a coordinate is described as a axial/cube-coordinate in http://www.redblobgames.com/grids/hexagons/#coordinates.
+ */
 public final class Coordinate {
 	
 	private final int x; // Q = X
@@ -11,10 +15,25 @@ public final class Coordinate {
 		this.y = y;
 	}
 	
+	/**
+	 * Creates an instance of Coordinate from x, y and an implicit z-value
+	 * @param x x value
+	 * @param y y value
+	 * @throws IllegalArgumentException	If x + y + (-x-y) != 0
+	 * @return an instance of Coordinate
+	 */
 	public static Coordinate from(final int x, final int y) {
 		return from(x, y, -x-y);
 	}
 	
+	/**
+	 * Creates an instance of Coordinate from x, y and z
+	 * @param x x value
+	 * @param y y value
+	 * @param z z value
+	 * @throws IllegalArgumentException	If x + y + z != 0
+	 * @return an instance of Coordinate
+	 */
 	public static Coordinate from(final int x, final int y, final int z) {
 		if (x + z + y != 0) {
 			throw new IllegalArgumentException("Coordinate values including implicit Z-coordinate must equal 0");

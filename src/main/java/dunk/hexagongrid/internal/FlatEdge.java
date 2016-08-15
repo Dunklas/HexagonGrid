@@ -19,6 +19,8 @@ final class FlatEdge extends AbstractEdge {
 	
 	@Override
 	public Point getFirstPoint(GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
 		if (type == Edge.Type.NORTH_WEST)
 			return parent.getCornerPoint(layout, 3);
 		else if (type == Edge.Type.NORTH)
@@ -29,6 +31,8 @@ final class FlatEdge extends AbstractEdge {
 
 	@Override
 	public Point getSecondPoint(GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
 		if (type == Edge.Type.NORTH_WEST)
 			return parent.getCornerPoint(layout, 2);
 		else if (type == Edge.Type.NORTH)

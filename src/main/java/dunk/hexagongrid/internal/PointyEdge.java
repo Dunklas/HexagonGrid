@@ -20,6 +20,8 @@ final class PointyEdge extends AbstractEdge {
 	// Left-most or upper point is first one
 	@Override
 	public Point getFirstPoint(GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
 		if (type == Edge.Type.NORTH_WEST)
 			return parent.getCornerPoint(layout, 3);
 		else if (type == Edge.Type.WEST)
@@ -30,6 +32,8 @@ final class PointyEdge extends AbstractEdge {
 
 	@Override
 	public Point getSecondPoint(GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
 		if (type == Edge.Type.NORTH_WEST)
 			return parent.getCornerPoint(layout, 2);
 		else if (type == Edge.Type.WEST)
