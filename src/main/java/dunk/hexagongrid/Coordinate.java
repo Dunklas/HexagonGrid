@@ -48,6 +48,13 @@ public final class Coordinate {
 	public int getY() { return y; }
 	public int getZ() { return -x - y; }
 	
+	/**
+	 * Compares the specified {@code object} with this {@code Coordinate} for equality.
+	 * Returns true if and only if the specified {@code object} is also a {@code Coordinate} and their {@code x-} and {@code y-coordinates} are equal.
+	 * 
+	 * @param obj  the {@code object} to be compared for equality with this {@code Coordinate}
+	 * @return true if the specified {@code object} is equal to this {@code Coordinate}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
@@ -62,6 +69,11 @@ public final class Coordinate {
 		return true;
 	}
 	
+	/**
+	 * Returns the hash code value for this {@code Coordinate}.
+	 * 
+	 * @return the hash code value for this {@code Coordinate}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -84,4 +84,24 @@ public interface Hexagon {
 	 * @see Edge.Direction
 	 */
 	Collection<Edge>	getEdges();
+	
+	
+	/**
+	 * Compares the specified {@code object} with this {@code Hexagon} for equality.
+	 * Returns true if and only if the specified {@code object} is of the same implementation class and their {@code coordinate} and {@code orientation} are equal.
+	 * 
+	 * @param obj  the {@code object} to be compared for equality with this {@code Hexagon}
+	 * @return true if the specified {@code object} is equal to this {@code Hexagon}
+	 */
+	@Override
+	boolean				equals(Object obj);
+	
+	
+	/**
+	 * Returns the hash code value for this {@code Hexagon}.
+	 * 
+	 * @return the hash code value for this {@code Hexagon}
+	 */
+	@Override
+	int					hashCode();
 }

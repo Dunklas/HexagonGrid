@@ -62,4 +62,24 @@ public interface Edge {
 	 * @return the {@link Edge.Direction} of this {@code Edge}.
 	 */
 	Edge.Direction 	getType();
+
+	
+	/**
+	 * Compares the specified {@code object} with this {@code Edge} for equality.
+	 * Returns true if and only if the specified {@code object} is of the same implementation class and their parent {@link Hexagon} and {@link Edge.Direction} are equal.
+	 * 
+	 * @param obj  the {@code object} to be compared for equality with this {@code Edge}
+	 * @return true if the specified {@code object} is equal to this {@code Edge}
+	 */
+	@Override
+	boolean				equals(Object obj);
+	
+	
+	/**
+	 * Returns the hash code value for this {@code Edge}.
+	 * 
+	 * @return the hash code value for this {@code Edge}
+	 */
+	@Override
+	int					hashCode();
 }

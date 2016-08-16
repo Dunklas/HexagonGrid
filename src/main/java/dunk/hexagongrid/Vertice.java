@@ -48,4 +48,24 @@ public interface Vertice {
 	 * @return the {@link Vertice.Direction} of this {@code Vertice}.
 	 */
 	Vertice.Direction 	getType();
+	
+	
+	/**
+	 * Compares the specified {@code object} with this {@code Vertice} for equality.
+	 * Returns true if and only if the specified {@code object} is of the same implementation class and their parent {@link Hexagon} and {@link Vertice.Direction} are equal.
+	 * 
+	 * @param obj  the {@code object} to be compared for equality with this {@code Vertice}
+	 * @return true if the specified {@code object} is equal to this {@code Vertice}
+	 */
+	@Override
+	boolean				equals(Object obj);
+	
+	
+	/**
+	 * Returns the hash code value for this {@code Vertice}.
+	 * 
+	 * @return the hash code value for this {@code Vertice}
+	 */
+	@Override
+	int					hashCode();
 }
