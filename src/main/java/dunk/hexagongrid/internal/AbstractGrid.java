@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import dunk.hexagongrid.AlienHexagonException;
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Edge;
 import dunk.hexagongrid.Grid;
@@ -58,35 +57,34 @@ abstract class AbstractGrid implements Grid {
 					+ " not in grid of size: " + radius);
 	}
 
-	@Override // Throws AlienHexagonException if pixel is outside hexagon grid
-	public Hexagon getHexagon(Point pixel, GridLayout layout) throws AlienHexagonException {
-		if (pixel == null || layout == null) throw new NullPointerException();
+	@Override 
+	public Hexagon getHexagon(double x, double y, GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
 		
 		HexagonOrientation o = orientation;
+		Point pixel = new Point(x, y);
 		
 		Point pt = new Point((pixel.getX() - layout.origin.getX()) / layout.sizeX,
 				 			 (pixel.getY() - layout.origin.getY()) / layout.sizeY);
-		double x = o.b0 * pt.getX() + o.b1 * pt.getY();
-		double y = o.b2 * pt.getX() + o.b3 * pt.getY();
+		double newX = o.b0 * pt.getX() + o.b1 * pt.getY();
+		double newY = o.b2 * pt.getX() + o.b3 * pt.getY();
 		
-		FractionalCoordinate tempCoord = FractionalCoordinate.from(x, y);
+		FractionalCoordinate tempCoord = FractionalCoordinate.from(newX, newY);
 		Coordinate finalCoord = CoordinateCalculator.round(tempCoord);
 		
-		try {
-			return getHexagon(finalCoord);
-		} catch (HexagonOutOfBoundsException hoobe) {
-			throw new AlienHexagonException("Point: " + pixel + "not within grid");
-		}
+		return getHexagon(finalCoord);
 	}
 
-	@Override // Throws AlienHexagonException if pixel is outside hexagon grid
-	public Vertice getVertice(Point pixel, GridLayout layout) throws AlienHexagonException {
-		if (pixel == null || layout == null) throw new NullPointerException();
-		Hexagon center = getHexagon(pixel, layout);
+	@Override
+	public Vertice getVertice(double x, double y, GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
+		Hexagon center = getHexagon(x, y, layout);
 		Collection<Hexagon> range = getRange(center, 1);
 		Vertice closestVertice = null;
 		double closestDistance = Double.MAX_VALUE;
 		
+		Point pixel = new Point(x, y);
 		for (Hexagon h : range) {
 			for (Vertice v : h.getVertices()) {
 				double distance = pixel.distanceTo(v.getPoint(layout));
@@ -99,14 +97,16 @@ abstract class AbstractGrid implements Grid {
 		return closestVertice;
 	}
 
-	@Override // Throws AlienHexagonException if pixel is outside hexagon grid
-	public Edge getEdge(Point pixel, GridLayout layout) throws AlienHexagonException {
-		if (pixel == null || layout == null) throw new NullPointerException();
-		Hexagon center = getHexagon(pixel, layout);
+	@Override
+	public Edge getEdge(double x, double y, GridLayout layout) {
+		if (layout == null) throw new NullPointerException();
+		
+		Hexagon center = getHexagon(x, y, layout);
 		Collection<Hexagon> range = getRange(center, 1);
 		Edge closestEdge = null;
 		double closestDistance = Double.MAX_VALUE;
 		
+		Point pixel = new Point(x, y);
 		for (Hexagon h : range) {
 			for (Edge e : h.getEdges()) {
 				double distance = pixel.distanceTo(e.getCenterPoint(layout));
@@ -121,6 +121,7 @@ abstract class AbstractGrid implements Grid {
 
 	@Override
 	public boolean contains(Coordinate coordinate) {
+		if (coordinate == null) throw new NullPointerException();
 		return coordinates.contains(coordinate);
 	}
 	
@@ -174,6 +175,7 @@ abstract class AbstractGrid implements Grid {
 		if (!contains(hexagon.getCoordinate())) throw new IllegalArgumentException();
 		return getRing(hexagon, 1);
 	}
+	
 	// Helper method for PointyGrid / FlatGrid, to avoid exceptions when requesting a set of neighbours
 	protected Collection<Hexagon> verifyCoordinates(Coordinate... coordinates) {
 		Collection<Hexagon> list = new HashSet<>();

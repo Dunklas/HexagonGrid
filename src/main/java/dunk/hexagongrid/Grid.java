@@ -3,88 +3,184 @@ package dunk.hexagongrid;
 import java.util.Collection;
 
 /**
- * Represents a grid of hexagons
+ * Represents a {@code Grid} of {@code Hexagon}s.
  */
 public interface Grid {
 
 	/**
-	 * Represents the formation of a Grid
-	 * E.g. Rectangle, Hexagon, Triangle
+	 * Represents the formation of a {@code Grid}. 
+	 * In other words, how {@link Hexagon}s are aligned with each other in a {@code Grid}.
 	 */
 	public enum Formation {
 		HEXAGON,
 	}
 	
-	/**
-	 * Returns all {@link Hexagon} instances in this Grid
-	 * @return a {@link Collection} of all {@link Hexagon} instances in this Grid
-	 */
-	Collection<Hexagon> getHexagons(); // Returns COPY (defensive protection)
 	
 	/**
-	 * Returns {@link Hexagon} instances within a range. See http://www.redblobgames.com/grids/hexagons/#range for more information.
-	 * @param center the {@link Hexagon} from where the range should originate
-	 * @param radius the radius of the range
-	 * @throws NullPointerException if center is null
-	 * @throws IllegalArgumentException if radius is less than 0, if radius is more than the radius of this Grid, or if center is not present in this Grid
-	 * @return a {@link Collection} of the {@link Hexagon} instances in specified range
+	 * Returns a {@code Collection} of all {@code Hexagon}s present in this {@code Grid}.
+	 * 
+	 * @return a copy of the internal {@code Collection} of {@link Hexagon}s
+	 */
+	Collection<Hexagon> getHexagons();
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Hexagon}s within a range.
+	 * 
+	 * @param center  the center of the range, not null
+	 * @param radius  the radius of the range
+	 * @return a {@code Collection} of the {@link Hexagon}s which are less than or equal to {@code radius} distance from {@code center}
+	 * @throws IllegalArgumentException if {@code radius} is less than 0 or more than the {@code radius} of this {@code Grid}
+	 * @throws IllegalArgumentException if {@code center} is not present in this {@code Grid}
 	 */
 	Collection<Hexagon> getRange(Hexagon center, int radius);
 	
+	
 	/**
-	 * Returns a ring of {@link Hexagon} instances. See http://www.redblobgames.com/grids/hexagons/#rings for more information.
-	 * @param center the {@link Hexagon} from where the ring should originate
-	 * @param radius the radius from where the ring should be retrieved.
-	 * @throws NullPointerException if center is null
-	 * @throws IllegalArgumentException if radius is less than 1, if radius is more than the radius of this Grid, or if center is not present in this Grid
-	 * @return a {@link Collection} of the {@link Hexagon} instances in the specified ring
+	 * Returns a {@code Collection} of {@code Hexagon}s in a ring.
+	 * 
+	 * @param center  the center of the ring, not null
+	 * @param radius  the radius of the ring
+	 * @return a {@code Collection} of the {@link Hexagon}s which are {@code radius} distance from {@code center}
+	 * @throws IllegalArgumentException if {@code radius} is less than 1 or more than the {@code radius} of this {@code Grid}
+	 * @throws IllegalArgumentException if {@code center} is not present in this {@code Grid}
 	 */
 	Collection<Hexagon> getRing(Hexagon center, int radius);
 	
+	
 	/**
-	 * Returns a {@link Hexagon} of the specified coordinate
-	 * @param coordinate coordinate of the Hexagon to retrieve
-	 * @throws HexagonOutOfBoundsException if {@link Hexagon} of coordinate is not present in this Grid
-	 * @return the {@link Hexagon} of the specified coordinate
+	 * Returns a {@code Hexagon} by its {@code coordinate}.
+	 * 
+	 * @param coordinate  the {@code coordinate}, not null
+	 * @return the {@code Hexagon} of {@code coordinate}
+	 * @throws HexagonOutOfBoundsException if {@link Hexagon} of {@code coordinate} is not present in this {@code Grid}
 	 */
 	Hexagon				getHexagon(Coordinate coordinate);
 	
-	/**
-	 * Returns a {@link Hexagon} from the provided pixel
-	 * @param pixel a pixel
-	 * @param layout an instance of {@link GridLayout} representing size and position of {@link Grid}
-	 * @return the {@link Hexagon} corresponding to provided {@link Point} pixel
-	 * @throws AlienHexagonException if {@link Point} pixel represents a position outside this Grid
-	 */
-	Hexagon				getHexagon(Point pixel, GridLayout layout) throws AlienHexagonException;
 	
 	/**
-	 * Returns a {@link Vertice} from the provided pixel
-	 * @param pixel a pixel
-	 * @param layout an instance of {@link GridLayout} representing size and position of {@link Grid}
-	 * @return the {@link Vertice} corresponding to provided {@link Point} pixel
-	 * @throws AlienHexagonException if {@link Point} pixel represents a position outside this Grid
+	 * Returns a {@code Hexagon} from a pixel coordinate.
+	 * 
+	 * @param x  the x-coordinate of a pixel
+	 * @param y  the y-coordinate of a pixel
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return the {@link Hexagon} of the pixel coordinate
+	 * @throws HexagonOutOfBoundsException if pixel coordinate represents a position outside this {@code Grid}
 	 */
-	Vertice				getVertice(Point pixel, GridLayout layout) throws AlienHexagonException;
+	Hexagon				getHexagon(double x, double y, GridLayout layout);
+	
 	
 	/**
-	 * Returns an {@link Edge} from the provided pixel
-	 * @param pixel a pixel
-	 * @param layout an instance of {@link GridLayout} representing size and position of {@link Grid}
-	 * @return the {@link Edge} corresponding to provided {@link Point} pixel
-	 * @throws AlienHexagonException if {@link Point} pixel represents a position outside this Grid
+	 * Returns a {@code Vertice} from a pixel coordinate.
+	 * 
+	 * @param x  the x-coordinate of a pixel
+	 * @param y  the y-coordinate of a pixel
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return the {@link Vertice} of the pixel coordinate
+	 * @throws HexagonOutOfBoundsException if pixel coordinate represents a position outside this {@code Grid}
 	 */
-	Edge				getEdge(Point pixel, GridLayout layout) throws AlienHexagonException;
+	Vertice				getVertice(double x, double y, GridLayout layout);
 	
+	
+	/**
+	 * Returns an {@code Edge} from a pixel coordinate.
+	 * 
+	 * @param x  the x-coordinate of a pixel
+	 * @param y  the y-coordinate of a pixel
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return the {@link Edge} of the pixel coordinate
+	 * @throws HexagonOutOfBoundsException if pixel coordinate represents a position outside this {@code Grid}
+	 */
+	Edge				getEdge(double x, double y, GridLayout layout);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Hexagon}s neighbouring {@code hexagon}.
+	 * 
+	 * @param hexagon  the target hexagon, not null
+	 * @return a {@code Collection} of {@code Hexagon}s which are adjacent to {@code hexagon}
+	 * @throws IllegalArgumentException if {@code hexagon} is not present in this {@code Grid}
+	 */
 	Collection<Hexagon> hexagonsNear(Hexagon hexagon);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Hexagon}s neighbouring {@code vertice}.
+	 * 
+	 * @param vertice  the target vertice, not null
+	 * @return a {@code Collection} of {@link Hexagon}s which are adjacent to {@code vertice}
+	 */
 	Collection<Hexagon> hexagonsNear(Vertice vertice);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Hexagon}s neighbouring {@code edge}.
+	 * 
+	 * @param edge  the target edge, not null
+	 * @return a {@code Collection} of {@link Hexagon}s which are adjacent to {@code edge}
+	 */
 	Collection<Hexagon> hexagonsNear(Edge edge);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Vertice}s neighbouring {@code hexagon}.
+	 * 
+	 * @param hexagon  the target hexagon, not null
+	 * @return a {@code Collection} of {@link Vertice}s which are adjacent to {@code hexagon}
+	 */
 	Collection<Vertice> verticesNear(Hexagon hexagon);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Vertice}s neighbouring {@code vertice}.
+	 * 
+	 * @param vertice  the target vertice, not null
+	 * @return a {@code Collection} of {@link Vertice}s which are adjacent to {@code vertice}
+	 */
 	Collection<Vertice> verticesNear(Vertice vertice);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Vertice}s neighbouring {@code edge}.
+	 * 
+	 * @param edge  the target edge, not null
+	 * @return a {@code Collection} of {@link Vertice}s which are adjacent to {@code edge}
+	 */
 	Collection<Vertice> verticesNear(Edge edge);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Edge}s neighbouring {@code hexagon}.
+	 * 
+	 * @param hexagon  the target hexagon, not null
+	 * @return a {@code Collection} of {@link Edge}s which are adjacent to {@code hexagon}
+	 */
 	Collection<Edge>	edgesNear(Hexagon hexagon);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Edge}s neighbouring {@code vertice}.
+	 * 
+	 * @param vertice  the target vertice, not null
+	 * @return a {@code Collection} of {@link Edge}s which are adjacent to {@code vertice}
+	 */
 	Collection<Edge>	edgesNear(Vertice vertice);
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Edge}s neighbouring {@code edge}.
+	 * 
+	 * @param edge  the target edge, not null
+	 * @return a {@code Collection} of {@link Edge}s which are adjacent to {@code edge}
+	 */
 	Collection<Edge> 	edgesNear(Edge edge);
 	
+	
+	/**
+	 * Indicates whether {@code coordinate} is present in this {@code Grid}.
+	 * 
+	 * @param coordinate  the target coordinate, not null
+	 * @return true if {@code coordinate} is present, false otherwise
+	 */
 	boolean				contains(Coordinate coordinate);
 }

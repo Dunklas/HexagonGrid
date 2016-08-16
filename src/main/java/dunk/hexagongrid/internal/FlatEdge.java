@@ -6,13 +6,13 @@ import dunk.hexagongrid.Point;
 
 final class FlatEdge extends AbstractEdge {
 	
-	private FlatEdge(final AbstractHexagon parent, final Edge.Type edgeType) {
+	private FlatEdge(final AbstractHexagon parent, final Edge.Direction edgeType) {
 		super(parent, edgeType);
 	}
 	
-	static FlatEdge of(final AbstractHexagon parent, final Edge.Type edgeType) {
-		if (edgeType == Edge.Type.WEST ||
-			edgeType == Edge.Type.SOUTH_WEST)
+	static FlatEdge of(final AbstractHexagon parent, final Edge.Direction edgeType) {
+		if (edgeType == Edge.Direction.WEST ||
+			edgeType == Edge.Direction.SOUTH_WEST)
 			throw new IllegalArgumentException("edgeType must be NORTH_WEST, NORTH or NORTH_EAST");
 		return new FlatEdge(parent, edgeType);
 	}
@@ -21,9 +21,9 @@ final class FlatEdge extends AbstractEdge {
 	public Point getFirstPoint(GridLayout layout) {
 		if (layout == null) throw new NullPointerException();
 		
-		if (type == Edge.Type.NORTH_WEST)
+		if (type == Edge.Direction.NORTH_WEST)
 			return parent.getCornerPoint(layout, 3);
-		else if (type == Edge.Type.NORTH)
+		else if (type == Edge.Direction.NORTH)
 			return parent.getCornerPoint(layout, 2);
 		else
 			return parent.getCornerPoint(layout, 1);
@@ -33,9 +33,9 @@ final class FlatEdge extends AbstractEdge {
 	public Point getSecondPoint(GridLayout layout) {
 		if (layout == null) throw new NullPointerException();
 		
-		if (type == Edge.Type.NORTH_WEST)
+		if (type == Edge.Direction.NORTH_WEST)
 			return parent.getCornerPoint(layout, 2);
-		else if (type == Edge.Type.NORTH)
+		else if (type == Edge.Direction.NORTH)
 			return parent.getCornerPoint(layout, 1);
 		else
 			return parent.getCornerPoint(layout, 0);

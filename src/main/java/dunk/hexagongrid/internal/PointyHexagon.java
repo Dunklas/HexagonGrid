@@ -11,21 +11,21 @@ import dunk.hexagongrid.Vertice;
 
 class PointyHexagon extends AbstractHexagon {
 	
-	private final Map<Vertice.Type, Vertice> vertices = new EnumMap<>(Vertice.Type.class);
-	private final Map<Edge.Type, Edge> edges = new EnumMap<>(Edge.Type.class);
+	private final Map<Vertice.Direction, Vertice> vertices = new EnumMap<>(Vertice.Direction.class);
+	private final Map<Edge.Direction, Edge> edges = new EnumMap<>(Edge.Direction.class);
 	
 	PointyHexagon(Coordinate coordinate) {
 		super(HexagonOrientation.POINTY, coordinate);
 		
-		vertices.put(Vertice.Type.NORTH, PointyVertice.of(this, Vertice.Type.NORTH));
-		vertices.put(Vertice.Type.SOUTH, PointyVertice.of(this, Vertice.Type.SOUTH));
-		edges.put(Edge.Type.NORTH_WEST, PointyEdge.of(this, Edge.Type.NORTH_WEST));
-		edges.put(Edge.Type.WEST, PointyEdge.of(this, Edge.Type.WEST));
-		edges.put(Edge.Type.SOUTH_WEST, PointyEdge.of(this, Edge.Type.SOUTH_WEST));
+		vertices.put(Vertice.Direction.NORTH, PointyVertice.of(this, Vertice.Direction.NORTH));
+		vertices.put(Vertice.Direction.SOUTH, PointyVertice.of(this, Vertice.Direction.SOUTH));
+		edges.put(Edge.Direction.NORTH_WEST, PointyEdge.of(this, Edge.Direction.NORTH_WEST));
+		edges.put(Edge.Direction.WEST, PointyEdge.of(this, Edge.Direction.WEST));
+		edges.put(Edge.Direction.SOUTH_WEST, PointyEdge.of(this, Edge.Direction.SOUTH_WEST));
 	}
 
 	@Override
-	public Vertice getVertice(Vertice.Type direction) {
+	public Vertice getVertice(Vertice.Direction direction) {
 		if (vertices.containsKey(direction))
 			return vertices.get(direction);
 		else
@@ -33,7 +33,7 @@ class PointyHexagon extends AbstractHexagon {
 	}
 
 	@Override
-	public Edge getEdge(Edge.Type direction) {
+	public Edge getEdge(Edge.Direction direction) {
 		if (edges.containsKey(direction))
 			return edges.get(direction);
 		else

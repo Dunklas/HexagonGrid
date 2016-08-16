@@ -11,21 +11,21 @@ import dunk.hexagongrid.Vertice;
 
 final class FlatHexagon extends AbstractHexagon {
 	
-	private final Map<Vertice.Type, Vertice> vertices = new EnumMap<>(Vertice.Type.class);
-	private final Map<Edge.Type, Edge> edges = new EnumMap<>(Edge.Type.class);
+	private final Map<Vertice.Direction, Vertice> vertices = new EnumMap<>(Vertice.Direction.class);
+	private final Map<Edge.Direction, Edge> edges = new EnumMap<>(Edge.Direction.class);
 	
 	FlatHexagon(Coordinate coordinate) {
 		super(HexagonOrientation.FLAT, coordinate);
 		
-		vertices.put(Vertice.Type.WEST, FlatVertice.of(this, Vertice.Type.WEST));
-		vertices.put(Vertice.Type.EAST, FlatVertice.of(this, Vertice.Type.EAST));
-		edges.put(Edge.Type.NORTH_WEST, FlatEdge.of(this, Edge.Type.NORTH_WEST));
-		edges.put(Edge.Type.NORTH, FlatEdge.of(this, Edge.Type.NORTH));
-		edges.put(Edge.Type.NORTH_EAST, FlatEdge.of(this, Edge.Type.NORTH_EAST));
+		vertices.put(Vertice.Direction.WEST, FlatVertice.of(this, Vertice.Direction.WEST));
+		vertices.put(Vertice.Direction.EAST, FlatVertice.of(this, Vertice.Direction.EAST));
+		edges.put(Edge.Direction.NORTH_WEST, FlatEdge.of(this, Edge.Direction.NORTH_WEST));
+		edges.put(Edge.Direction.NORTH, FlatEdge.of(this, Edge.Direction.NORTH));
+		edges.put(Edge.Direction.NORTH_EAST, FlatEdge.of(this, Edge.Direction.NORTH_EAST));
 	}
 	
 	@Override
-	public Vertice getVertice(Vertice.Type direction) {
+	public Vertice getVertice(Vertice.Direction direction) {
 		if (vertices.containsKey(direction))
 			return vertices.get(direction);
 		else
@@ -33,7 +33,7 @@ final class FlatHexagon extends AbstractHexagon {
 	}
 
 	@Override
-	public Edge getEdge(Edge.Type direction) {
+	public Edge getEdge(Edge.Direction direction) {
 		if (edges.containsKey(direction))
 			return edges.get(direction);
 		else

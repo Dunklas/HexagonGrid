@@ -1,8 +1,8 @@
 package dunk.hexagongrid;
 
 /**
- * Represents the coordinate of a {@link Hexagon} in a {@link Grid}
- * This implementation of a coordinate is described as a axial/cube-coordinate in http://www.redblobgames.com/grids/hexagons/#coordinates.
+ * Represents the location of a {@code Hexagon} in a {@code Grid}.
+ * This implementation of a coordinate is described as an axial/cube-coordinate in http://www.redblobgames.com/grids/hexagons/#coordinates.
  */
 public final class Coordinate {
 	
@@ -16,23 +16,25 @@ public final class Coordinate {
 	}
 	
 	/**
-	 * Creates an instance of Coordinate from x, y and an implicit z-value
-	 * @param x x value
-	 * @param y y value
-	 * @throws IllegalArgumentException	If x + y + (-x-y) != 0
-	 * @return an instance of Coordinate
+	 * Creates a new {@code Coordinate} from x, y and an implicit z-value.
+	 * 
+	 * @param x  x-value
+	 * @param y  y-value
+	 * @return a new {@code Coordinate}
+	 * @throws IllegalArgumentException	if x + y + (-x-y) != 0
 	 */
 	public static Coordinate from(final int x, final int y) {
 		return from(x, y, -x-y);
 	}
 	
 	/**
-	 * Creates an instance of Coordinate from x, y and z
-	 * @param x x value
-	 * @param y y value
-	 * @param z z value
-	 * @throws IllegalArgumentException	If x + y + z != 0
-	 * @return an instance of Coordinate
+	 * Creates a new {@code Coordinate} from x, y and an explicit z-value.
+	 * 
+	 * @param x  x-value
+	 * @param y  y-value
+	 * @param z  z-value
+	 * @return a new {@code Coordinate}
+	 * @throws IllegalArgumentException	if x + y + z != 0
 	 */
 	public static Coordinate from(final int x, final int y, final int z) {
 		if (x + z + y != 0) {

@@ -8,9 +8,9 @@ import dunk.hexagongrid.Vertice;
 abstract class AbstractVertice implements Vertice {
 
 	protected final AbstractHexagon parent;
-	protected final Vertice.Type type;
+	protected final Vertice.Direction type;
 	
-	protected AbstractVertice(AbstractHexagon parent, Vertice.Type type) {
+	protected AbstractVertice(AbstractHexagon parent, Vertice.Direction type) {
 		if (parent == null || type == null) 
 			throw new NullPointerException();
 		this.parent = parent;
@@ -26,7 +26,7 @@ abstract class AbstractVertice implements Vertice {
 	}
 	
 	@Override
-	public Vertice.Type getType() {
+	public Vertice.Direction getType() {
 		return type;
 	}
 

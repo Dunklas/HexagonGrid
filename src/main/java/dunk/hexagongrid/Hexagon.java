@@ -2,18 +2,86 @@ package dunk.hexagongrid;
 
 import java.util.Collection;
 
+/**
+ * Represents a {@code Hexagon} in a {@code Grid}.
+ * <p>
+ * A reference to a {@code Hexagon} is acquired by invoking for example the {@link Grid#getHexagons() getHexagons} or {@link Grid#getHexagon(Coordinate)} method.
+ * <p>
+ * A {@code Hexagon} may be used to relate data, such as an object in a game to a {@code Hexagon}.
+ */
 public interface Hexagon {
 
+	/**
+	 * Represents the orientation of a {@code Hexagon}.
+	 */
 	public enum Orientation {
 		POINTY,
 		FLAT
 	}
 	
+	/**
+	 * Returns the {@code Coordinate} of this {@code Hexagon}.
+	 * 
+	 * @return the coordinate of this {@code Hexagon}
+	 */
 	Coordinate 			getCoordinate();
+	
+	
+	/**
+	 * Returns a {@code Collection} of {@code Point}s which represents the corners of this {@code Hexagon}. 
+	 * The {@link Point}s may be used to draw the {@code Hexagon}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return a {@code Collection} of {@code Point}s which represents the corners of this {@code Hexagon}
+	 */
 	Collection<Point> 	getPoints(GridLayout layout);
-	Point				getCenterPoint(GridLayout layout);
-	Vertice 			getVertice(Vertice.Type direction);
-	Collection<Vertice> getVertices(); // Returns COPY to avoid modification
-	Edge 				getEdge(Edge.Type direction);
-	Collection<Edge>	getEdges(); // Returns COPY to avoid modification
+	
+	
+	/**
+	 * Returns a {@code Point} representing the centre of this {@code Hexagon}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return a {@link Point} representing the centre of this {@code Hexagon}
+	 */
+	Point				getCentrePoint(GridLayout layout);
+	
+	
+	/**
+	 * Returns a {@code Vertice} in the specified {@code direction}.
+	 * 
+	 * @param direction  the direction
+	 * @return a {@link Vertice} in the specified {@code direction}
+	 * @throws IllegalArgumentException if {@code direction} is not present for this {@code Hexagon}
+	 * @see Vertice.Direction
+	 */
+	Vertice 			getVertice(Vertice.Direction direction);
+	
+	
+	/**
+	 * Returns a {@code Collection} of all {@code Vertice}s for this {@code Hexagon}.
+	 *  
+	 * @return a copy of the internal {@code Collection} of {@link Vertice}s
+	 * @see Vertice.Direction
+	 */
+	Collection<Vertice> getVertices();
+	
+	
+	/**
+	 * Returns an {@code Edge} in the specified {@code direction}.
+	 * 
+	 * @param direction  the direction
+	 * @return an {@link Edge} in the specified {@code direction}
+	 * @throws IllegalArgumentException if {@code direction} is not present for this {@code Hexagon}
+	 * @see Edge.Direction
+	 */
+	Edge 				getEdge(Edge.Direction direction);
+	
+	
+	/**
+	 * Returns a {@code Collection} of all {@code Edge}s for this {@code Hexagon}.
+	 * 
+	 * @return a copy of the internal {@code Collection} of {@link Edge}s
+	 * @see Edge.Direction
+	 */
+	Collection<Edge>	getEdges();
 }

@@ -23,14 +23,14 @@ public final class FlatGrid extends AbstractGrid {
 		Collection<Hexagon> hexagons = new HashSet<>();
 		Coordinate c1; Coordinate c2;
 		
-		if (vertice.getType() == Vertice.Type.WEST) {
+		if (vertice.getType() == Vertice.Direction.WEST) {
 			c1 = Neighbourhood.adjacentTo(
 							parent.getCoordinate(),
 							Neighbourhood.Regular.N4);
 			c2 = Neighbourhood.adjacentTo(
 							parent.getCoordinate(),
 							Neighbourhood.Regular.N5);
-		} else if (vertice.getType() == Vertice.Type.EAST) {
+		} else if (vertice.getType() == Vertice.Direction.EAST) {
 			c1 = Neighbourhood.adjacentTo(
 							parent.getCoordinate(),
 							Neighbourhood.Regular.N1);
@@ -52,15 +52,15 @@ public final class FlatGrid extends AbstractGrid {
 		Collection<Hexagon> hexagons = new HashSet<>();
 		Coordinate c1;
 		
-		if (edge.getType() == Edge.Type.NORTH_WEST) {
+		if (edge.getType() == Edge.Direction.NORTH_WEST) {
 			c1 = Neighbourhood.adjacentTo(
 					parent.getCoordinate(),
 					Neighbourhood.Regular.N4);
-		} else if (edge.getType() == Edge.Type.NORTH) {
+		} else if (edge.getType() == Edge.Direction.NORTH) {
 			c1 = Neighbourhood.adjacentTo(
 					parent.getCoordinate(),
 					Neighbourhood.Regular.N3);
-		} else if (edge.getType() == Edge.Type.NORTH_EAST) {
+		} else if (edge.getType() == Edge.Direction.NORTH_EAST) {
 			c1 = Neighbourhood.adjacentTo(
 					parent.getCoordinate(),
 					Neighbourhood.Regular.N2);
@@ -76,8 +76,8 @@ public final class FlatGrid extends AbstractGrid {
 		if (hexagon == null) throw new NullPointerException();
 		
 		Collection<Vertice> vertices = new HashSet<>();
-		vertices.add(hexagon.getVertice(Vertice.Type.WEST));
-		vertices.add(hexagon.getVertice(Vertice.Type.EAST));
+		vertices.add(hexagon.getVertice(Vertice.Direction.WEST));
+		vertices.add(hexagon.getVertice(Vertice.Direction.EAST));
 		
 		Coordinate nw = Neighbourhood.adjacentTo(
 				hexagon.getCoordinate(),
@@ -93,10 +93,10 @@ public final class FlatGrid extends AbstractGrid {
 				Neighbourhood.Regular.N1);
 		
 		for (Hexagon h : verifyCoordinates(nw, sw)) {
-			vertices.add(h.getVertice(Vertice.Type.EAST));
+			vertices.add(h.getVertice(Vertice.Direction.EAST));
 		}
 		for (Hexagon h : verifyCoordinates(ne, se)) {
-			vertices.add(h.getVertice(Vertice.Type.WEST));
+			vertices.add(h.getVertice(Vertice.Direction.WEST));
 		}
 		return vertices;
 	}
@@ -105,10 +105,10 @@ public final class FlatGrid extends AbstractGrid {
 	public Collection<Vertice> verticesNear(Vertice vertice) {
 		if (vertice == null) throw new NullPointerException();
 		
-		Vertice.Type dir = vertice.getType();
+		Vertice.Direction dir = vertice.getType();
 		Coordinate c1, c2, c3;
 		
-		if (dir == Vertice.Type.WEST) {
+		if (dir == Vertice.Direction.WEST) {
 			c1 = Neighbourhood.adjacentTo(
 					vertice.getParent().getCoordinate(),
 					Neighbourhood.Regular.N4);
@@ -118,7 +118,7 @@ public final class FlatGrid extends AbstractGrid {
 			c3 = Neighbourhood.diagonalTo(
 					vertice.getParent().getCoordinate(),
 					Neighbourhood.Diagonal.D2);
-		} else if (dir == Vertice.Type.EAST) {
+		} else if (dir == Vertice.Direction.EAST) {
 			c1 = Neighbourhood.adjacentTo(
 					vertice.getParent().getCoordinate(),
 					Neighbourhood.Regular.N2);
@@ -132,8 +132,8 @@ public final class FlatGrid extends AbstractGrid {
 			throw new IllegalArgumentException("Illegal vertice: " + vertice);
 		}
 		
-		if (dir == Vertice.Type.WEST) dir = Vertice.Type.EAST;
-		else dir = Vertice.Type.WEST; // I do this to get correct vertices in below loop
+		if (dir == Vertice.Direction.WEST) dir = Vertice.Direction.EAST;
+		else dir = Vertice.Direction.WEST; // I do this to get correct vertices in below loop
 		
 		Collection<Vertice> vertices = new HashSet<>();
 		for (Hexagon h : verifyCoordinates(c1, c2, c3)) {
@@ -148,38 +148,38 @@ public final class FlatGrid extends AbstractGrid {
 		
 		Collection<Vertice> vertices = new HashSet<>();
 		
-		if (edge.getType() == Edge.Type.NORTH_WEST) {
-			vertices.add(edge.getParent().getVertice(Vertice.Type.WEST));
+		if (edge.getType() == Edge.Direction.NORTH_WEST) {
+			vertices.add(edge.getParent().getVertice(Vertice.Direction.WEST));
 			
 			Coordinate c = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N4);
 			for (Hexagon h : verifyCoordinates(c)) {
-				vertices.add(h.getVertice(Vertice.Type.EAST));
+				vertices.add(h.getVertice(Vertice.Direction.EAST));
 			}
 			
-		} else if (edge.getType() == Edge.Type.NORTH) {
+		} else if (edge.getType() == Edge.Direction.NORTH) {
 			Coordinate c1 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N4);
 			for (Hexagon h : verifyCoordinates(c1)) {
-				vertices.add(h.getVertice(Vertice.Type.EAST));
+				vertices.add(h.getVertice(Vertice.Direction.EAST));
 			}
 			Coordinate c2 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N2);
 			for (Hexagon h : verifyCoordinates(c2)) {
-				vertices.add(h.getVertice(Vertice.Type.WEST));
+				vertices.add(h.getVertice(Vertice.Direction.WEST));
 			}
 			
-		} else if (edge.getType() == Edge.Type.NORTH_EAST) {
-			vertices.add(edge.getParent().getVertice(Vertice.Type.EAST));
+		} else if (edge.getType() == Edge.Direction.NORTH_EAST) {
+			vertices.add(edge.getParent().getVertice(Vertice.Direction.EAST));
 			
 			Coordinate c = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N2);
 			for (Hexagon h : verifyCoordinates(c)) {
-				vertices.add(h.getVertice(Vertice.Type.WEST));
+				vertices.add(h.getVertice(Vertice.Direction.WEST));
 			}
 		} else {
 			throw new IllegalArgumentException("Illegal edge: " + edge);
@@ -198,21 +198,21 @@ public final class FlatGrid extends AbstractGrid {
 				hexagon.getCoordinate(),
 				Neighbourhood.Regular.N5);
 		for (Hexagon h : verifyCoordinates(c1)) {
-			edges.add(h.getEdge(Edge.Type.NORTH_EAST));
+			edges.add(h.getEdge(Edge.Direction.NORTH_EAST));
 		}
 		
 		Coordinate c2 = Neighbourhood.adjacentTo(
 				hexagon.getCoordinate(),
 				Neighbourhood.Regular.N6);
 		for (Hexagon h : verifyCoordinates(c2)) {
-			edges.add(h.getEdge(Edge.Type.NORTH));
+			edges.add(h.getEdge(Edge.Direction.NORTH));
 		}
 		
 		Coordinate c3 = Neighbourhood.adjacentTo(
 				hexagon.getCoordinate(),
 				Neighbourhood.Regular.N1);
 		for (Hexagon h : verifyCoordinates(c3)) {
-			edges.add(h.getEdge(Edge.Type.NORTH_WEST));
+			edges.add(h.getEdge(Edge.Direction.NORTH_WEST));
 		}
 		
 		return edges;
@@ -224,26 +224,26 @@ public final class FlatGrid extends AbstractGrid {
 		
 		Collection<Edge> edges = new HashSet<>();	
 		
-		if (vertice.getType() == Vertice.Type.WEST) {
-			edges.add(vertice.getParent().getEdge(Edge.Type.NORTH_WEST));
+		if (vertice.getType() == Vertice.Direction.WEST) {
+			edges.add(vertice.getParent().getEdge(Edge.Direction.NORTH_WEST));
 			
 			Coordinate c = Neighbourhood.adjacentTo(
 					vertice.getParent().getCoordinate(),
 					Neighbourhood.Regular.N5);
 			for (Hexagon h : verifyCoordinates(c)) {
-				edges.add(h.getEdge(Edge.Type.NORTH));
-				edges.add(h.getEdge(Edge.Type.NORTH_EAST));
+				edges.add(h.getEdge(Edge.Direction.NORTH));
+				edges.add(h.getEdge(Edge.Direction.NORTH_EAST));
 			}
 			
-		} else if (vertice.getType() == Vertice.Type.EAST) {
-			edges.add(vertice.getParent().getEdge(Edge.Type.NORTH_EAST));
+		} else if (vertice.getType() == Vertice.Direction.EAST) {
+			edges.add(vertice.getParent().getEdge(Edge.Direction.NORTH_EAST));
 			
 			Coordinate c = Neighbourhood.adjacentTo(
 					vertice.getParent().getCoordinate(),
 					Neighbourhood.Regular.N1);
 			for (Hexagon h : verifyCoordinates(c)) {
-				edges.add(h.getEdge(Edge.Type.NORTH));
-				edges.add(h.getEdge(Edge.Type.NORTH_WEST));
+				edges.add(h.getEdge(Edge.Direction.NORTH));
+				edges.add(h.getEdge(Edge.Direction.NORTH_WEST));
 			}
 		} else {
 			throw new IllegalArgumentException("Illegal vertice: " + vertice);
@@ -257,58 +257,58 @@ public final class FlatGrid extends AbstractGrid {
 		
 		Collection<Edge> edges = new HashSet<>();
 		
-		if (edge.getType() == Edge.Type.NORTH_WEST) {
-			edges.add(edge.getParent().getEdge(Edge.Type.NORTH));
+		if (edge.getType() == Edge.Direction.NORTH_WEST) {
+			edges.add(edge.getParent().getEdge(Edge.Direction.NORTH));
 			
 			Coordinate c1 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N4);
 			for (Hexagon h : verifyCoordinates(c1)) {
-				edges.add(h.getEdge(Edge.Type.NORTH_EAST));
+				edges.add(h.getEdge(Edge.Direction.NORTH_EAST));
 			}
 			
 			Coordinate c2 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N5);
 			for (Hexagon h : verifyCoordinates(c2)) {
-				edges.add(h.getEdge(Edge.Type.NORTH));
-				edges.add(h.getEdge(Edge.Type.NORTH_EAST));
+				edges.add(h.getEdge(Edge.Direction.NORTH));
+				edges.add(h.getEdge(Edge.Direction.NORTH_EAST));
 			}
 			
-		} else if (edge.getType() == Edge.Type.NORTH) {
-			edges.add(edge.getParent().getEdge(Edge.Type.NORTH_WEST));
-			edges.add(edge.getParent().getEdge(Edge.Type.NORTH_EAST));
+		} else if (edge.getType() == Edge.Direction.NORTH) {
+			edges.add(edge.getParent().getEdge(Edge.Direction.NORTH_WEST));
+			edges.add(edge.getParent().getEdge(Edge.Direction.NORTH_EAST));
 			
 			Coordinate c1 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N4);
 			for (Hexagon h : verifyCoordinates(c1)) {
-				edges.add(h.getEdge(Edge.Type.NORTH_EAST));
+				edges.add(h.getEdge(Edge.Direction.NORTH_EAST));
 			}
 			
 			Coordinate c2 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N2);
 			for (Hexagon h : verifyCoordinates(c2)) {
-				edges.add(h.getEdge(Edge.Type.NORTH_WEST));
+				edges.add(h.getEdge(Edge.Direction.NORTH_WEST));
 			}
 			
-		} else if (edge.getType() == Edge.Type.NORTH_EAST) {
-			edges.add(edge.getParent().getEdge(Edge.Type.NORTH));
+		} else if (edge.getType() == Edge.Direction.NORTH_EAST) {
+			edges.add(edge.getParent().getEdge(Edge.Direction.NORTH));
 			
 			Coordinate c1 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N2);
 			for (Hexagon h : verifyCoordinates(c1)) {
-				edges.add(h.getEdge(Edge.Type.NORTH_WEST));
+				edges.add(h.getEdge(Edge.Direction.NORTH_WEST));
 			}
 			
 			Coordinate c2 = Neighbourhood.adjacentTo(
 					edge.getParent().getCoordinate(),
 					Neighbourhood.Regular.N1);
 			for (Hexagon h : verifyCoordinates(c2)) {
-				edges.add(h.getEdge(Edge.Type.NORTH_WEST));
-				edges.add(h.getEdge(Edge.Type.NORTH));
+				edges.add(h.getEdge(Edge.Direction.NORTH_WEST));
+				edges.add(h.getEdge(Edge.Direction.NORTH));
 			}
 		} else {
 			throw new IllegalArgumentException("Illegal edge: " + edge);

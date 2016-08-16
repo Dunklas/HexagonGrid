@@ -8,9 +8,9 @@ import dunk.hexagongrid.Point;
 abstract class AbstractEdge implements Edge {
 
 	protected final AbstractHexagon parent;
-	protected final Edge.Type type;
+	protected final Edge.Direction type;
 
-	AbstractEdge(AbstractHexagon parent, Edge.Type type) {
+	AbstractEdge(AbstractHexagon parent, Edge.Direction type) {
 		if (parent == null || type == null)
 			throw new NullPointerException();
 		this.parent = parent;
@@ -24,7 +24,7 @@ abstract class AbstractEdge implements Edge {
 	public abstract Point getSecondPoint(GridLayout layout);
 	
 	@Override
-	public Type getType() {
+	public Direction getType() {
 		return type;
 	}
 	

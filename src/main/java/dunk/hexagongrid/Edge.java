@@ -1,17 +1,23 @@
 package dunk.hexagongrid;
 
 /**
- * Represents an edge of a {@link Hexagon}.
- * For each {@link Hexagon} in a {@link Grid}, three Edge instances are created.
+ * Represents an {@code Edge} of a {@code Hexagon}.
+ * For each {@link Hexagon}, three {@code Edge}s are created.
+ * <p>
+ * A reference to an {@code Edge} is acquired by invoking the {@link Hexagon#getEdges() getEdges} or {@link Hexagon#getEdge(Edge.Direction) getEdge} method.
+ * <p>
+ * An {@code Edge} may be used to relate data, such as an object in a game to an {@code Edge}.
  */
 public interface Edge {
 
 	/**
-	 * Represents the direction of an Edge.
-	 * For a pointy {@link Hexagon}, Edge instances of type NORTH_WEST, WEST and SOUTH_WEST are created.
-	 * For a flat {@link Hexagon}, Edge instances of type NORTH_WEST, NORTH and NORTH_EAST are created.
+	 * Represents the direction of an {@code Edge}.
+	 * <p>
+	 * For a pointy {@link Hexagon}, {@code Edge}s of direction {@code NORTH_WEST}, {@code WEST} and {@code SOUTH_WEST} are created.
+	 * <p>
+	 * For a flat {@code Hexagon}, {@code Edge}s of direction {@code NORTH_WEST}, {@code NORTH} and {@code NORTH_EAST} are created.
 	 */
-	public enum Type {
+	public enum Direction {
 		NORTH,
 		WEST,
 		NORTH_WEST,
@@ -20,30 +26,40 @@ public interface Edge {
 	}
 	
 	/**
-	 * @param layout	an instance of {@link GridLayout} representing size and position of {@link Grid}
-	 * @return			the top/left {@link Point} of this Edge
+	 * Returns a {@code Point} representing one end of this {@code Edge}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return the top/left {@link Point} of this {@code Edge}
 	 */
 	Point 		getFirstPoint(GridLayout layout);
 	
 	/**
-	 * @param layout	an instance of {@link GridLayout} representing size and position of {@link Grid}
-	 * @return			the lower/right {@link Point} of this Edge.
+	 * Returns a {@code Point} representing one end of this {@code Edge}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return the lower/right {@link Point} of this {@code Edge}
 	 */
 	Point 		getSecondPoint(GridLayout layout);
 	
 	/**
-	 * @param layout	an instance of {@link GridLayout} representing size and position of {@link Grid}
-	 * @return			the centre {@link Point} of this Edge.
+	 * Returns a {@code Point} representing the centre of this {@code Edge}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return the centre {@link Point} of this {@code Edge}
 	 */
 	Point 		getCenterPoint(GridLayout layout);
 	
 	/**
-	 * @return			the parent {@link Hexagon}
+	 * Returns the parent {@code Hexagon} of this {@code Edge}.
+	 * 
+	 * @return the parent {@link Hexagon}
 	 */
 	Hexagon 	getParent();
 	
 	/**
-	 * @return			the {@link Edge.Type} of this Edge.
+	 * Returns the {@code Edge.Direction} of this {@code Edge}.
+	 *
+	 * @return the {@link Edge.Direction} of this {@code Edge}.
 	 */
-	Edge.Type 	getType();
+	Edge.Direction 	getType();
 }

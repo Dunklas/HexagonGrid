@@ -28,10 +28,10 @@ abstract class AbstractHexagon implements Hexagon {
 	public Coordinate getCoordinate() { return coordinate; }
 	
 	@Override
-	public abstract Vertice getVertice(dunk.hexagongrid.Vertice.Type direction);
+	public abstract Vertice getVertice(dunk.hexagongrid.Vertice.Direction direction);
 	
 	@Override
-	public abstract Edge getEdge(dunk.hexagongrid.Edge.Type direction);
+	public abstract Edge getEdge(dunk.hexagongrid.Edge.Direction direction);
 	
 	@Override
 	public abstract Collection<Edge> getEdges();
@@ -54,14 +54,14 @@ abstract class AbstractHexagon implements Hexagon {
 		if (layout == null) throw new NullPointerException();
 		if (corner < 0 || corner > 5) throw new IllegalArgumentException();
 		
-		Point center = getCenterPoint(layout);
+		Point center = getCentrePoint(layout);
 		Point offset = getHexCornerOffset(layout, corner);
 		return new Point(center.getX() + offset.getX(),
 						 center.getY() + offset.getY());
 	}
 	
 	@Override
-	public Point getCenterPoint(GridLayout layout) {
+	public Point getCentrePoint(GridLayout layout) {
 		if (layout == null) throw new NullPointerException();
 		
 		HexagonOrientation o = this.orientation;

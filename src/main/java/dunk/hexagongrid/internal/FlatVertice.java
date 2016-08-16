@@ -6,20 +6,22 @@ import dunk.hexagongrid.Vertice;
 
 final class FlatVertice extends AbstractVertice {
 
-	private FlatVertice(final AbstractHexagon parent, final Vertice.Type verticeType) {
+	private FlatVertice(final AbstractHexagon parent, final Vertice.Direction verticeType) {
 		super(parent, verticeType);
 	}
 	
-	static FlatVertice of(final AbstractHexagon parent, final Vertice.Type verticeType) {
-		if (verticeType == Vertice.Type.NORTH ||
-			verticeType == Vertice.Type.SOUTH)
+	static FlatVertice of(final AbstractHexagon parent, final Vertice.Direction verticeType) {
+		if (verticeType == Vertice.Direction.NORTH ||
+			verticeType == Vertice.Direction.SOUTH)
 			throw new IllegalArgumentException("verticeType must be WEST or EAST");
 		return new FlatVertice(parent, verticeType);
 	}
 	
 	@Override
 	public Point getPoint(GridLayout layout) {
-		if (type == Vertice.Type.WEST)
+		if (layout == null) throw new NullPointerException();
+		
+		if (type == Vertice.Direction.WEST)
 			return parent.getCornerPoint(layout, 3);
 		else
 			return parent.getCornerPoint(layout, 0);
