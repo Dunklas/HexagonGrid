@@ -1,6 +1,6 @@
 package dunk.hexagongrid.internal;
 
-enum HexagonOrientation {
+public enum HexagonOrientation {
 	
 	POINTY(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,
 		   Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0,

@@ -11,8 +11,8 @@ import dunk.hexagongrid.Vertice;
 
 public final class PointyGrid extends AbstractGrid {
 
-	public PointyGrid(final int radius, final Grid.Formation formation) {
-		super(radius, formation, Hexagon.Orientation.POINTY);
+	public PointyGrid(final int radius, final Collection<Coordinate> coordinates) {
+		super(radius, coordinates, Hexagon.Orientation.POINTY);
 	}
 
 	@Override

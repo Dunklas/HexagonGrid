@@ -22,9 +22,9 @@ abstract class AbstractGrid implements Grid {
 	private Collection<Coordinate> coordinates 	= new HashSet<>();
 	private Map<Coordinate, Hexagon> hexagonMap = new HashMap<>();
 	
-	AbstractGrid(final int radius, final Grid.Formation formation, final Hexagon.Orientation orientation) {
+	AbstractGrid(final int radius, final Collection<Coordinate> coordinates, final Hexagon.Orientation orientation) {
 		this.radius = radius;
-		this.coordinates = GridProducer.getCoordinates(formation, radius);
+		this.coordinates = coordinates;
 		
 		if (orientation == Hexagon.Orientation.POINTY) {
 			this.orientation = HexagonOrientation.POINTY;

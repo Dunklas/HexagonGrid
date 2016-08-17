@@ -1,9 +1,9 @@
 package dunk.hexagongrid;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+
+import org.junit.Test;
 
 public class CoordinateTest {
 
@@ -17,12 +17,12 @@ public class CoordinateTest {
 		Coordinate c4 = Coordinate.from(0, 2);
 		assertNotEquals(c3, c4);
 		
-		Grid g1 = GridFactory.createGrid(1, Grid.Formation.HEXAGON, Hexagon.Orientation.POINTY);
+		Grid g1 = new GridBuilder().build();
 		Coordinate c5 = Coordinate.from(1, 0);
 		Hexagon h1 = g1.getHexagon(c5);
 		assertNotEquals(c5, h1);
 		
-		Grid g2 = GridFactory.createGrid(1, Grid.Formation.HEXAGON, Hexagon.Orientation.FLAT);
+		Grid g2 = new GridBuilder().build();
 		Coordinate c6 = Coordinate.from(-1, 0);
 		Hexagon h2 = g2.getHexagon(c6);
 		assertNotEquals(c6, h2);

@@ -10,13 +10,13 @@ import java.util.Collection;
  * A {@code Hexagon} may be used to relate data, such as an object in a game to a {@code Hexagon}.
  */
 public interface Hexagon {
-
+	
 	/**
-	 * Represents the orientation of a {@code Hexagon}.
+	 * Represents the orientation of a Hexagon.
 	 */
 	public enum Orientation {
-		POINTY,
-		FLAT
+		FLAT,
+		POINTY
 	}
 	
 	/**

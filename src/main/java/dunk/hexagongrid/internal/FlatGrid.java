@@ -11,8 +11,8 @@ import dunk.hexagongrid.Vertice;
 
 public final class FlatGrid extends AbstractGrid {
 
-	public FlatGrid(final int radius, final Grid.Formation formation) {
-		super(radius, formation, Hexagon.Orientation.FLAT);
+	public FlatGrid(final int radius, final Collection<Coordinate> coordinates) {
+		super(radius, coordinates, Hexagon.Orientation.FLAT);
 	}
 
 	@Override
