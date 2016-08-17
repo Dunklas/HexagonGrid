@@ -4,10 +4,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Edge;
 import dunk.hexagongrid.Grid;
+import dunk.hexagongrid.GridBuilder;
 import dunk.hexagongrid.GridLayout;
 import dunk.hexagongrid.Hexagon;
 import dunk.hexagongrid.HexagonOutOfBoundsException;
@@ -19,14 +21,13 @@ abstract class AbstractGrid implements Grid {
 	private int radius;
 	private HexagonOrientation orientation;
 	
-	private Collection<Coordinate> coordinates 	= new HashSet<>();
 	private Map<Coordinate, Hexagon> hexagonMap = new HashMap<>();
 	
-	AbstractGrid(final int radius, final Collection<Coordinate> coordinates, final Hexagon.Orientation orientation) {
-		this.radius = radius;
-		this.coordinates = coordinates;
+	AbstractGrid(final GridBuilder builder) {
+		this.radius = builder.getRadius();
+		Set<Coordinate> coordinates = builder.getFormation().getStrategy().getCoordinates(builder);
 		
-		if (orientation == Hexagon.Orientation.POINTY) {
+		if (builder.getOrientation() == Hexagon.Orientation.POINTY) {
 			this.orientation = HexagonOrientation.POINTY;
 			for (Coordinate c : coordinates) {
 				Hexagon temp = new PointyHexagon(c);
@@ -43,7 +44,7 @@ abstract class AbstractGrid implements Grid {
 	}
 	
 	@Override
-	public Collection<Hexagon> getHexagons() {
+	public Set<Hexagon> getHexagons() {
 		return new HashSet<>(hexagonMap.values());
 	}
 
@@ -122,7 +123,7 @@ abstract class AbstractGrid implements Grid {
 	@Override
 	public boolean contains(Coordinate coordinate) {
 		if (coordinate == null) throw new NullPointerException();
-		return coordinates.contains(coordinate);
+		return hexagonMap.containsKey(coordinate);
 	}
 	
 	@Override

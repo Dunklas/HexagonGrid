@@ -1,6 +1,7 @@
 package dunk.hexagongrid;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Represents a {@code Grid} of {@code Hexagon}s.
@@ -12,7 +13,7 @@ public interface Grid {
 	 * 
 	 * @return a copy of the internal {@code Collection} of {@link Hexagon}s
 	 */
-	Collection<Hexagon> getHexagons();
+	Set<Hexagon> getHexagons();
 	
 	
 	/**

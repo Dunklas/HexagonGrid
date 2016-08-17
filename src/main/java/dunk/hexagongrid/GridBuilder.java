@@ -1,7 +1,5 @@
 package dunk.hexagongrid;
 
-import java.util.Collection;
-
 import dunk.hexagongrid.internal.FlatGrid;
 import dunk.hexagongrid.internal.PointyGrid;
 
@@ -37,12 +35,20 @@ public final class GridBuilder {
 	}
 	
 	public Grid build() {
-		Collection<Coordinate> coords = formation.getStrategy().getCoordinates(this);
-		Grid grid = null;
+		verifyBuilder();
 		if (orientation == Hexagon.Orientation.POINTY)
-			grid = new PointyGrid(this.radius, coords);
+			return new PointyGrid(this);
 		else 
-			grid = new FlatGrid(this.radius, coords);
-		return grid;
+			return new FlatGrid(this);
+	}
+		
+	private void verifyBuilder() {
+		if (radius <= 0)
+			throw new IllegalArgumentException("Illegal radius: " + radius + ". Must be greater than 0.");
+		if (formation == null)
+			throw new IllegalArgumentException("Illegal formation: " + formation + ". Must not be null.");
+		if (orientation == null)
+			throw new IllegalArgumentException("Illegal orientation: " + orientation + ". Must not be null.");
+		formation.getStrategy().verifyBuilder(this);
 	}
 }

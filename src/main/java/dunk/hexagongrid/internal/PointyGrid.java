@@ -5,14 +5,14 @@ import java.util.HashSet;
 
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Edge;
-import dunk.hexagongrid.Grid;
+import dunk.hexagongrid.GridBuilder;
 import dunk.hexagongrid.Hexagon;
 import dunk.hexagongrid.Vertice;
 
 public final class PointyGrid extends AbstractGrid {
 
-	public PointyGrid(final int radius, final Collection<Coordinate> coordinates) {
-		super(radius, coordinates, Hexagon.Orientation.POINTY);
+	public PointyGrid(final GridBuilder builder) {
+		super(builder);
 	}
 
 	@Override

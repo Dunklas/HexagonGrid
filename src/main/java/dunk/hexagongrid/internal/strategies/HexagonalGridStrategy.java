@@ -1,7 +1,7 @@
 package dunk.hexagongrid.internal.strategies;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.GridBuilder;
@@ -9,8 +9,8 @@ import dunk.hexagongrid.GridBuilder;
 public final class HexagonalGridStrategy extends GridStrategy {
 
 	@Override
-	public Collection<Coordinate> getCoordinates(GridBuilder builder) {
-		Collection<Coordinate> grid = new HashSet<>();
+	public Set<Coordinate> getCoordinates(final GridBuilder builder) {
+		Set<Coordinate> grid = new HashSet<>();
 		int radius = builder.getRadius();
 		for (int x = -radius; x <= radius; x++) {
 			int y1 = Math.max(-radius, -x -radius);
@@ -21,5 +21,11 @@ public final class HexagonalGridStrategy extends GridStrategy {
 				}
 			}
 		return grid;
+	}
+
+	@Override
+	public void verifyBuilder(final GridBuilder builder) {
+		if (builder.getRadius() > 500)
+			throw new IllegalArgumentException("Illegal radius: " + builder.getRadius() + ". Must be less than 0 for formation: " + builder.getFormation());
 	}
 }
