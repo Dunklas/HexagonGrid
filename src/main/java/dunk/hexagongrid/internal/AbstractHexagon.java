@@ -86,15 +86,13 @@ abstract class AbstractHexagon implements Hexagon {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
+		if (!(obj instanceof Hexagon)) return false;
 		
-		AbstractHexagon other = (AbstractHexagon) obj;
+		Hexagon other = (Hexagon) obj;
 		if (coordinate == null) {
-			if (other.coordinate != null)
+			if (other.getCoordinate() != null)
 				return false;
-		} else if (!coordinate.equals(other.coordinate))
-			return false;
-		if (orientation != other.orientation)
+		} else if (!coordinate.equals(other.getCoordinate()))
 			return false;
 		return true;
 	}
@@ -104,7 +102,6 @@ abstract class AbstractHexagon implements Hexagon {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((coordinate == null) ? 0 : coordinate.hashCode());
-		result = prime * result + ((orientation == null) ? 0 : orientation.hashCode());
 		return result;
 	}
 	

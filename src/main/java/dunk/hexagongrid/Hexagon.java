@@ -88,7 +88,7 @@ public interface Hexagon {
 	
 	/**
 	 * Compares the specified {@code object} with this {@code Hexagon} for equality.
-	 * Returns true if and only if the specified {@code object} is of the same implementation class and their {@code coordinate} and {@code orientation} are equal.
+	 * Returns true if and only if the specified {@code object} implements Hexagon and their {@code coordinate} are equal.
 	 * 
 	 * @param obj  the {@code object} to be compared for equality with this {@code Hexagon}
 	 * @return true if the specified {@code object} is equal to this {@code Hexagon}
