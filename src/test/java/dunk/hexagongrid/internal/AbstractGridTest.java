@@ -11,60 +11,69 @@ import org.junit.Test;
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Grid;
 import dunk.hexagongrid.GridBuilder;
+import dunk.hexagongrid.GridFormation;
+import dunk.hexagongrid.GridLayout;
 import dunk.hexagongrid.Hexagon;
 import dunk.hexagongrid.HexagonOutOfBoundsException;
 
 public final class AbstractGridTest {
 
-	Grid pointyGrid;
-	GridBuilder pointyBuilder;
-	Grid flatGrid;
-	GridBuilder flatBuilder;
+	private static final Hexagon.Orientation orientation = Hexagon.Orientation.POINTY;
+	private static final GridFormation formation = GridFormation.HEXAGONAL;
+	private static final int radius = 3;
+	
+	private Grid grid;
+	private GridBuilder builder;
 	
 	@Before
 	public void setUp() {
-		pointyBuilder  	= new GridBuilder()
-				.setOrientation(Hexagon.Orientation.POINTY)
+		builder = new GridBuilder()
+				.setOrientation(orientation)
+				.setFormation(formation)
 				.setRadius(3);
-		flatBuilder		= new GridBuilder()
-				.setOrientation(Hexagon.Orientation.FLAT)
-				.setRadius(3);
-		pointyGrid 	= pointyBuilder.build();
-		flatGrid 	= flatBuilder.build();
 		
+		grid = builder.build();
 	}
 	
 	@Test
 	public void getHexagonsShouldReturnProperly() {
-		Set<Hexagon> pointyHexagons = new HashSet<>();
-		for (Coordinate c : pointyBuilder.getFormation().getStrategy().getCoordinates(pointyBuilder)) {
-			pointyHexagons.add(new PointyHexagon(c));
+		Set<Hexagon> hexagons = new HashSet<>();
+		for (Coordinate c : builder.getFormation().getStrategy().getCoordinates(builder)) {
+			hexagons.add(new PointyHexagon(c));
 		}
-		assertEquals(pointyHexagons, pointyGrid.getHexagons());
-		
-		Set<Hexagon> flatHexagons = new HashSet<>();
-		for (Coordinate c : flatBuilder.getFormation().getStrategy().getCoordinates(flatBuilder)) {
-			flatHexagons.add(new FlatHexagon(c));
-		}
-		assertEquals(flatHexagons, flatGrid.getHexagons());
+		assertEquals(hexagons, grid.getHexagons());
 	}
 	
 	@Test
-	public void getHexagonShouldReturnProperHexagon() {
-		Hexagon pointyHexagon = new PointyHexagon(Coordinate.from(3, 0));
-		assertEquals(pointyGrid.getHexagon(Coordinate.from(3, 0)), pointyHexagon);
+	public void getHexagonByCoordShouldReturnProperHexagon() {
+		Hexagon hexagon = new PointyHexagon(Coordinate.from(radius, 0));
+		assertEquals(grid.getHexagon(Coordinate.from(radius, 0)), hexagon);
+	}
+	
+	@Test(expected=HexagonOutOfBoundsException.class)
+	public void getHexagonByCoordShouldThrowExceptionForInvalidCoordinate() {
+		grid.getHexagon(Coordinate.from(radius+1, -1));
+	}
+	
+	// These tests assume the pixel coordinates are in a 1024x768 window, with the grids origin at 1024/2, 768/2
+	@Test
+	public void getHexagonByPixelShouldReturnProperHexagon() {
+		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
+		double[] pixelX = {511, 252, 205};
+		double[] pixelY = {386, 378, 477};
+		Coordinate[] expectedCoord = {Coordinate.from(0, 0), Coordinate.from(-3, 0), Coordinate.from(-3, 1)};
 		
-		Hexagon flatHexagon	= new FlatHexagon(Coordinate.from(2, -1));
-		assertEquals(flatGrid.getHexagon(Coordinate.from(2, -1)), flatHexagon);
+		for (int i = 0; i < pixelX.length; i++) {
+			Coordinate tempCoord = grid.getHexagon(pixelX[i], pixelY[i], layout).getCoordinate();
+			assertEquals(tempCoord, expectedCoord[i]);
+		}
 	}
 	
 	@Test(expected=HexagonOutOfBoundsException.class)
-	public void getHexagonPointyShouldThrowExceptionForInvalidCoordinate() {
-		pointyGrid.getHexagon(Coordinate.from(5, -1));
-	}
-	
-	@Test(expected=HexagonOutOfBoundsException.class)
-	public void getHexagonFlatShouldThrowExceptionForInvalidCoordinate() {
-		flatGrid.getHexagon(Coordinate.from(5, -1));
+	public void getHexagonByPixelShouldThrowExceptionForOutsideGrid() {
+		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
+		double x = 146;
+		double y = 385;
+		grid.getHexagon(x, y, layout);
 	}
 }
