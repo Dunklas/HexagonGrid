@@ -2,6 +2,7 @@ package dunk.hexagongrid.internal;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Edge;
@@ -16,11 +17,11 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Hexagon> hexagonsNear(Vertice vertice) {
+	public Set<Hexagon> hexagonsNear(Vertice vertice) {
 		if (vertice == null) throw new NullPointerException();
 		
 		Hexagon parent = vertice.getParent();
-		Collection<Hexagon> hexagons = new HashSet<>();
+		Set<Hexagon> hexagons = new HashSet<>();
 		Coordinate c1; Coordinate c2;
 		
 		if (vertice.getType() == Vertice.Direction.NORTH) {
@@ -45,11 +46,11 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Hexagon> hexagonsNear(Edge edge) {
+	public Set<Hexagon> hexagonsNear(Edge edge) {
 		if (edge == null) throw new NullPointerException();
 		
 		Hexagon parent = edge.getParent();
-		Collection<Hexagon> hexagons = new HashSet<>();
+		Set<Hexagon> hexagons = new HashSet<>();
 		Coordinate c1;
 		
 		if (edge.getType() == Edge.Direction.NORTH_WEST) {
@@ -72,10 +73,10 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Vertice> verticesNear(Hexagon hexagon) {
+	public Set<Vertice> verticesNear(Hexagon hexagon) {
 		if (hexagon == null) throw new NullPointerException();
 		
-		Collection<Vertice> vertices = new HashSet<>();
+		Set<Vertice> vertices = new HashSet<>();
 		vertices.add(hexagon.getVertice(Vertice.Direction.NORTH));
 		vertices.add(hexagon.getVertice(Vertice.Direction.SOUTH));
 		
@@ -102,7 +103,7 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Vertice> verticesNear(Vertice vertice) {
+	public Set<Vertice> verticesNear(Vertice vertice) {
 		if (vertice == null) throw new NullPointerException();
 		
 		Vertice.Direction dir = vertice.getType();
@@ -135,7 +136,7 @@ public final class PointyGrid extends AbstractGrid {
 		if (dir == Vertice.Direction.NORTH) dir = Vertice.Direction.SOUTH;
 		else dir = Vertice.Direction.NORTH; // I do this to get correct vertices in below loop
 		
-		Collection<Vertice> vertices = new HashSet<>();
+		Set<Vertice> vertices = new HashSet<>();
 		for (Hexagon h : verifyCoordinates(c1, c2, c3)) {
 			vertices.add(h.getVertice(dir));
 		}
@@ -143,10 +144,10 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Vertice> verticesNear(Edge edge) {
+	public Set<Vertice> verticesNear(Edge edge) {
 		if (edge == null) throw new NullPointerException();
 		
-		Collection<Vertice> vertices = new HashSet<>();
+		Set<Vertice> vertices = new HashSet<>();
 		
 		if (edge.getType() == Edge.Direction.NORTH_WEST) {
 			vertices.add(edge.getParent().getVertice(Vertice.Direction.NORTH));
@@ -188,10 +189,10 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Edge> edgesNear(Hexagon hexagon) {
+	public Set<Edge> edgesNear(Hexagon hexagon) {
 		if (hexagon == null) throw new NullPointerException();
 		
-		Collection<Edge> edges = new HashSet<>();
+		Set<Edge> edges = new HashSet<>();
 		edges.addAll(hexagon.getEdges());
 		
 		Coordinate c1 = Neighbourhood.adjacentTo(
@@ -219,10 +220,10 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Edge> edgesNear(Vertice vertice) {
+	public Set<Edge> edgesNear(Vertice vertice) {
 		if (vertice == null) throw new NullPointerException();
 		
-		Collection<Edge> edges = new HashSet<>();	
+		Set<Edge> edges = new HashSet<>();	
 		
 		if (vertice.getType() == Vertice.Direction.NORTH) {
 			edges.add(vertice.getParent().getEdge(Edge.Direction.NORTH_WEST));
@@ -252,10 +253,10 @@ public final class PointyGrid extends AbstractGrid {
 	}
 
 	@Override
-	public Collection<Edge> edgesNear(Edge edge) {
+	public Set<Edge> edgesNear(Edge edge) {
 		if (edge == null) throw new NullPointerException();
 		
-		Collection<Edge> edges = new HashSet<>();
+		Set<Edge> edges = new HashSet<>();
 		
 		if (edge.getType() == Edge.Direction.NORTH_WEST) {
 			edges.add(edge.getParent().getEdge(Edge.Direction.WEST));

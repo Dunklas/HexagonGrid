@@ -1,6 +1,7 @@
 package dunk.hexagongrid;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a {@code Hexagon} in a {@code Grid}.
@@ -28,13 +29,13 @@ public interface Hexagon {
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Point}s which represents the corners of this {@code Hexagon}. 
+	 * Returns a {@code Set} of {@code Point}s which represents the corners of this {@code Hexagon}. 
 	 * The {@link Point}s may be used to draw the {@code Hexagon}.
 	 * 
 	 * @param layout  represents the size and position of a {@link Grid}, not null
-	 * @return a {@code Collection} of {@code Point}s which represents the corners of this {@code Hexagon}
+	 * @return a {@code Set} of {@code Point}s which represents the corners of this {@code Hexagon}
 	 */
-	Collection<Point> 	getPoints(GridLayout layout);
+	List<Point> 	getPoints(GridLayout layout);
 	
 	
 	/**
@@ -58,12 +59,12 @@ public interface Hexagon {
 	
 	
 	/**
-	 * Returns a {@code Collection} of all {@code Vertice}s for this {@code Hexagon}.
+	 * Returns a {@code Set} of all {@code Vertice}s for this {@code Hexagon}.
 	 *  
-	 * @return a copy of the internal {@code Collection} of {@link Vertice}s
+	 * @return a copy of the internal {@code Set} of {@link Vertice}s
 	 * @see Vertice.Direction
 	 */
-	Collection<Vertice> getVertices();
+	Set<Vertice> getVertices();
 	
 	
 	/**
@@ -78,12 +79,12 @@ public interface Hexagon {
 	
 	
 	/**
-	 * Returns a {@code Collection} of all {@code Edge}s for this {@code Hexagon}.
+	 * Returns a {@code Set} of all {@code Edge}s for this {@code Hexagon}.
 	 * 
-	 * @return a copy of the internal {@code Collection} of {@link Edge}s
+	 * @return a copy of the internal {@code Set} of {@link Edge}s
 	 * @see Edge.Direction
 	 */
-	Collection<Edge>	getEdges();
+	Set<Edge>	getEdges();
 	
 	
 	/**

@@ -1,7 +1,8 @@
 package dunk.hexagongrid.internal;
 
-import java.util.Collection;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Edge;
@@ -34,16 +35,16 @@ abstract class AbstractHexagon implements Hexagon {
 	public abstract Edge getEdge(dunk.hexagongrid.Edge.Direction direction);
 	
 	@Override
-	public abstract Collection<Edge> getEdges();
+	public abstract Set<Edge> getEdges();
 	
 	@Override
-	public abstract Collection<Vertice> getVertices();
+	public abstract Set<Vertice> getVertices();
 	
 	@Override
-	public Collection<Point> getPoints(GridLayout layout) {
+	public List<Point> getPoints(GridLayout layout) {
 		if (layout == null) throw new NullPointerException();
 		
-		Collection<Point> points = new Vector<>(6);
+		List<Point> points = new ArrayList<>();
 		for (int i = 0; i < 6; i++) {
 			points.add(getCornerPoint(layout, i));
 		}

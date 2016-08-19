@@ -1,9 +1,9 @@
 package dunk.hexagongrid.internal;
 
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import dunk.hexagongrid.Coordinate;
 import dunk.hexagongrid.Edge;
@@ -41,12 +41,12 @@ class PointyHexagon extends AbstractHexagon {
 	}
 	
 	@Override
-	public Collection<Edge> getEdges() {
+	public Set<Edge> getEdges() {
 		return new HashSet<>(edges.values());
 	}
 	
 	@Override
-	public Collection<Vertice> getVertices() {
+	public Set<Vertice> getVertices() {
 		return new HashSet<>(vertices.values());
 	}
 }

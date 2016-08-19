@@ -9,35 +9,35 @@ import java.util.Set;
 public interface Grid {
 
 	/**
-	 * Returns a {@code Collection} of all {@code Hexagon}s present in this {@code Grid}.
+	 * Returns a {@code Set} of all {@code Hexagon}s present in this {@code Grid}.
 	 * 
-	 * @return a copy of the internal {@code Collection} of {@link Hexagon}s
+	 * @return a copy of the internal {@code Set} of {@link Hexagon}s
 	 */
 	Set<Hexagon> getHexagons();
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Hexagon}s within a range.
+	 * Returns a {@code Set} of {@code Hexagon}s within a range.
 	 * 
 	 * @param center  the center of the range, not null
 	 * @param radius  the radius of the range
-	 * @return a {@code Collection} of the {@link Hexagon}s which are less than or equal to {@code radius} distance from {@code center}
+	 * @return a {@code Set} of the {@link Hexagon}s which are less than or equal to {@code radius} distance from {@code center}
 	 * @throws IllegalArgumentException if {@code radius} is less than 0 or more than the {@code radius} of this {@code Grid}
 	 * @throws IllegalArgumentException if {@code center} is not present in this {@code Grid}
 	 */
-	Collection<Hexagon> getRange(Hexagon center, int radius);
+	Set<Hexagon> getRange(Hexagon center, int radius);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Hexagon}s in a ring.
+	 * Returns a {@code Set} of {@code Hexagon}s in a ring.
 	 * 
 	 * @param center  the center of the ring, not null
 	 * @param radius  the radius of the ring
-	 * @return a {@code Collection} of the {@link Hexagon}s which are {@code radius} distance from {@code center}
+	 * @return a {@code Set} of the {@link Hexagon}s which are {@code radius} distance from {@code center}
 	 * @throws IllegalArgumentException if {@code radius} is less than 1 or more than the {@code radius} of this {@code Grid}
 	 * @throws IllegalArgumentException if {@code center} is not present in this {@code Grid}
 	 */
-	Collection<Hexagon> getRing(Hexagon center, int radius);
+	Set<Hexagon> getRing(Hexagon center, int radius);
 	
 	
 	/**
@@ -87,85 +87,85 @@ public interface Grid {
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Hexagon}s neighbouring {@code hexagon}.
+	 * Returns a {@code Set} of {@code Hexagon}s neighbouring {@code hexagon}.
 	 * 
 	 * @param hexagon  the target hexagon, not null
-	 * @return a {@code Collection} of {@code Hexagon}s which are adjacent to {@code hexagon}
+	 * @return a {@code Set} of {@code Hexagon}s which are adjacent to {@code hexagon}
 	 * @throws IllegalArgumentException if {@code hexagon} is not present in this {@code Grid}
 	 */
-	Collection<Hexagon> hexagonsNear(Hexagon hexagon);
+	Set<Hexagon> hexagonsNear(Hexagon hexagon);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Hexagon}s neighbouring {@code vertice}.
+	 * Returns a {@code Set} of {@code Hexagon}s neighbouring {@code vertice}.
 	 * 
 	 * @param vertice  the target vertice, not null
-	 * @return a {@code Collection} of {@link Hexagon}s which are adjacent to {@code vertice}
+	 * @return a {@code Set} of {@link Hexagon}s which are adjacent to {@code vertice}
 	 */
-	Collection<Hexagon> hexagonsNear(Vertice vertice);
+	Set<Hexagon> hexagonsNear(Vertice vertice);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Hexagon}s neighbouring {@code edge}.
+	 * Returns a {@code Set} of {@code Hexagon}s neighbouring {@code edge}.
 	 * 
 	 * @param edge  the target edge, not null
-	 * @return a {@code Collection} of {@link Hexagon}s which are adjacent to {@code edge}
+	 * @return a {@code Set} of {@link Hexagon}s which are adjacent to {@code edge}
 	 */
-	Collection<Hexagon> hexagonsNear(Edge edge);
+	Set<Hexagon> hexagonsNear(Edge edge);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Vertice}s neighbouring {@code hexagon}.
+	 * Returns a {@code Set} of {@code Vertice}s neighbouring {@code hexagon}.
 	 * 
 	 * @param hexagon  the target hexagon, not null
-	 * @return a {@code Collection} of {@link Vertice}s which are adjacent to {@code hexagon}
+	 * @return a {@code Set} of {@link Vertice}s which are adjacent to {@code hexagon}
 	 */
-	Collection<Vertice> verticesNear(Hexagon hexagon);
+	Set<Vertice> verticesNear(Hexagon hexagon);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Vertice}s neighbouring {@code vertice}.
+	 * Returns a {@code Set} of {@code Vertice}s neighbouring {@code vertice}.
 	 * 
 	 * @param vertice  the target vertice, not null
-	 * @return a {@code Collection} of {@link Vertice}s which are adjacent to {@code vertice}
+	 * @return a {@code Set} of {@link Vertice}s which are adjacent to {@code vertice}
 	 */
-	Collection<Vertice> verticesNear(Vertice vertice);
+	Set<Vertice> verticesNear(Vertice vertice);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Vertice}s neighbouring {@code edge}.
+	 * Returns a {@code Set} of {@code Vertice}s neighbouring {@code edge}.
 	 * 
 	 * @param edge  the target edge, not null
-	 * @return a {@code Collection} of {@link Vertice}s which are adjacent to {@code edge}
+	 * @return a {@code Set} of {@link Vertice}s which are adjacent to {@code edge}
 	 */
-	Collection<Vertice> verticesNear(Edge edge);
+	Set<Vertice> verticesNear(Edge edge);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Edge}s neighbouring {@code hexagon}.
+	 * Returns a {@code Set} of {@code Edge}s neighbouring {@code hexagon}.
 	 * 
 	 * @param hexagon  the target hexagon, not null
-	 * @return a {@code Collection} of {@link Edge}s which are adjacent to {@code hexagon}
+	 * @return a {@code Set} of {@link Edge}s which are adjacent to {@code hexagon}
 	 */
-	Collection<Edge>	edgesNear(Hexagon hexagon);
+	Set<Edge>	edgesNear(Hexagon hexagon);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Edge}s neighbouring {@code vertice}.
+	 * Returns a {@code Set} of {@code Edge}s neighbouring {@code vertice}.
 	 * 
 	 * @param vertice  the target vertice, not null
-	 * @return a {@code Collection} of {@link Edge}s which are adjacent to {@code vertice}
+	 * @return a {@code Set} of {@link Edge}s which are adjacent to {@code vertice}
 	 */
-	Collection<Edge>	edgesNear(Vertice vertice);
+	Set<Edge>	edgesNear(Vertice vertice);
 	
 	
 	/**
-	 * Returns a {@code Collection} of {@code Edge}s neighbouring {@code edge}.
+	 * Returns a {@code Set} of {@code Edge}s neighbouring {@code edge}.
 	 * 
 	 * @param edge  the target edge, not null
-	 * @return a {@code Collection} of {@link Edge}s which are adjacent to {@code edge}
+	 * @return a {@code Set} of {@link Edge}s which are adjacent to {@code edge}
 	 */
-	Collection<Edge> 	edgesNear(Edge edge);
+	Set<Edge> 	edgesNear(Edge edge);
 	
 	
 	/**

@@ -127,12 +127,12 @@ abstract class AbstractGrid implements Grid {
 	}
 	
 	@Override
-	public Collection<Hexagon> getRange(Hexagon center, int radius) {
+	public Set<Hexagon> getRange(Hexagon center, int radius) {
 		if (center == null) throw new NullPointerException();
 		if (radius < 0 || radius > this.radius || !contains(center.getCoordinate())) 
 			throw new IllegalArgumentException();
 		
-		Collection<Hexagon> hexagons = new HashSet<>();
+		Set<Hexagon> hexagons = new HashSet<>();
 		
 		for (int x = -radius; x <= radius; x++) {
 			for (int z = Math.max(-radius, -x - radius); z <= Math.min(radius, -x+radius); z++) {
@@ -147,7 +147,7 @@ abstract class AbstractGrid implements Grid {
 	}
 	
 	@Override
-	public Collection<Hexagon> getRing(Hexagon center, int radius) {
+	public Set<Hexagon> getRing(Hexagon center, int radius) {
 		if (center == null) throw new NullPointerException();
 		if (radius < 1 || radius > this.radius || !contains(center.getCoordinate())) 
 			throw new IllegalArgumentException();
@@ -158,7 +158,7 @@ abstract class AbstractGrid implements Grid {
 						Neighbourhood.Regular.N5.coordinate,
 						radius));
 				
-		Collection<Hexagon> hexagons = new HashSet<>();
+		Set<Hexagon> hexagons = new HashSet<>();
 		for (Neighbourhood.Regular n : Neighbourhood.Regular.values()) {
 			for (int i = 0; i < radius; i++) {
 				if (contains(tempCoord)) {
@@ -171,7 +171,7 @@ abstract class AbstractGrid implements Grid {
 	}
 
 	@Override
-	public Collection<Hexagon> hexagonsNear(Hexagon hexagon) {
+	public Set<Hexagon> hexagonsNear(Hexagon hexagon) {
 		if (hexagon == null) throw new NullPointerException();
 		if (!contains(hexagon.getCoordinate())) throw new IllegalArgumentException();
 		return getRing(hexagon, 1);
