@@ -55,25 +55,96 @@ public final class AbstractGridTest {
 		grid.getHexagon(Coordinate.from(radius+1, -1));
 	}
 	
+	
 	// These tests assume the pixel coordinates are in a 1024x768 window, with the grids origin at 1024/2, 768/2
+	// I've used pixels which should return same Hexagon, both for pointy and flat grids
+	// If ever implementing more formations, this needs to be changed
 	@Test
 	public void getHexagonByPixelShouldReturnProperHexagon() {
 		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
-		double[] pixelX = {511, 252, 205};
-		double[] pixelY = {386, 378, 477};
-		Coordinate[] expectedCoord = {Coordinate.from(0, 0), Coordinate.from(-3, 0), Coordinate.from(-3, 1)};
+		int[] xcoord = {556, 499, 510};
+		int[] ycoord = {339, 323, 385};
+		Coordinate expectedCoord[] = {Coordinate.from(1, -1), Coordinate.from(0, -1), Coordinate.from(0, 0)};
 		
-		for (int i = 0; i < pixelX.length; i++) {
-			Coordinate tempCoord = grid.getHexagon(pixelX[i], pixelY[i], layout).getCoordinate();
-			assertEquals(tempCoord, expectedCoord[i]);
+		for (int i = 0; i < xcoord.length; i++) {
+			Hexagon tempHex = grid.getHexagon(xcoord[i], ycoord[i], layout);
+			assertEquals(tempHex.getCoordinate(), expectedCoord[i]);
 		}
 	}
 	
 	@Test(expected=HexagonOutOfBoundsException.class)
 	public void getHexagonByPixelShouldThrowExceptionForOutsideGrid() {
 		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
-		double x = 146;
-		double y = 385;
+		double x = 272;
+		double y = 156;
 		grid.getHexagon(x, y, layout);
 	}
+	
+	@Test
+	public void getRangeShouldReturnProperHexagons() {
+		Set<Hexagon> expectedHexagons = new HashSet<>();
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, -1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(0, -1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(0, 0)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, 1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-2, 1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-2, 0)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, 0)));
+		
+		Hexagon targetHex = grid.getHexagon(Coordinate.from(-1, 0));
+		assertEquals(grid.getRange(targetHex, 1), expectedHexagons);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void getRangeShouldThrowExceptionForInvalidRange() {
+		Hexagon testHex = new PointyHexagon(Coordinate.from(radius, 0));
+		grid.getRange(testHex, radius+1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void getRangeShouldThrowExceptionForInvalidHexagon() {
+		Hexagon testHex = new PointyHexagon(Coordinate.from(radius+1, 0));
+		grid.getRange(testHex, radius);
+	}
+	
+	@Test
+	public void getRingShouldReturnProperHexagons() {
+		Set<Hexagon> expectedHexagons = new HashSet<>();
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, -1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(0, -1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(0, 0)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, 1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-2, 1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-2, 0)));
+		
+		Hexagon targetHex = grid.getHexagon(Coordinate.from(-1, 0));
+		assertEquals(grid.getRing(targetHex, 1), expectedHexagons);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void getRingShouldThrowExceptionForInvalidRange() {
+		Hexagon testHex = new PointyHexagon(Coordinate.from(radius, 0));
+		grid.getRing(testHex, radius+1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void getRingShouldThrowExceptionForInvalidHexagon() {
+		Hexagon testHex = new PointyHexagon(Coordinate.from(radius+1, 0));
+		grid.getRing(testHex, radius);
+	}
+	
+	@Test
+	public void hexagonsNearShouldReturnProperNeighbours() {
+		Set<Hexagon> expectedHexagons = new HashSet<>();
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, -1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(0, -1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(0, 0)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-1, 1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-2, 1)));
+		expectedHexagons.add(new PointyHexagon(Coordinate.from(-2, 0)));
+		
+		Hexagon targetHex = grid.getHexagon(Coordinate.from(-1, 0));
+		assertEquals(grid.hexagonsNear(targetHex), expectedHexagons);
+	}
+	
 }
