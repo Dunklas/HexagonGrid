@@ -65,4 +65,8 @@ public final class Point {
 	public double getY() { 
 		return y;
 	}
+	
+	public String toString() {
+		return String.format("X: %f Y: %f", x, y);
+	}
 }
