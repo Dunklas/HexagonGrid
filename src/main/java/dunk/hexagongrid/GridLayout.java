@@ -8,23 +8,20 @@ package dunk.hexagongrid;
 public final class GridLayout {
 
 	public final Point origin;
-	public final double sizeX;
-	public final double sizeY;
+	public final double size;
 	
 	/**
 	 * Creates a {@code GridLayout}.
 	 * 
 	 * @param posX  the specified x-coordinate of a {@link Grid}s centre
 	 * @param posY  the specified y-coordinate of a {@code Grid}s centre
-	 * @param width  the width of a {@link Hexagon}
-	 * @param height  the height of a {@code Hexagon}
+	 * @param size  the height of a {@code Hexagon}
 	 * @throws IllegalArgumentException if {@code width} or {@code height} is less than 1
 	 */
-	public GridLayout(final double posX, final double posY, final double width, final double height) {
-		if (width < 1 || height < 1) throw new IllegalArgumentException();
+	public GridLayout(final double posX, final double posY, final double size) {
+		if (size < 1) throw new IllegalArgumentException();
 		
 		this.origin = new Point(posX, posY);
-		this.sizeX = width;
-		this.sizeY = height;
+		this.size = size;
 	}
 }

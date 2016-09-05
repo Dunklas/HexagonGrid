@@ -61,7 +61,7 @@ public final class AbstractGridTest {
 	// If ever implementing more formations, this needs to be changed
 	@Test
 	public void getHexagonByPixelShouldReturnProperHexagon() {
-		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
+		GridLayout layout = new GridLayout(1024/2, 768/2, 60);
 		int[] xcoord = {556, 499, 510};
 		int[] ycoord = {339, 323, 385};
 		Coordinate expectedCoord[] = {Coordinate.from(1, -1), Coordinate.from(0, -1), Coordinate.from(0, 0)};
@@ -74,7 +74,7 @@ public final class AbstractGridTest {
 	
 	@Test(expected=HexagonOutOfBoundsException.class)
 	public void getHexagonByPixelShouldThrowExceptionForOutsideGrid() {
-		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
+		GridLayout layout = new GridLayout(1024/2, 768/2, 60);
 		double x = 272;
 		double y = 156;
 		grid.getHexagon(x, y, layout);

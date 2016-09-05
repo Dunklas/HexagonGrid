@@ -65,8 +65,8 @@ abstract class AbstractGrid implements Grid {
 		HexagonOrientation o = orientation;
 		Point pixel = new Point(x, y);
 		
-		Point pt = new Point((pixel.getX() - layout.origin.getX()) / layout.sizeX,
-				 			 (pixel.getY() - layout.origin.getY()) / layout.sizeY);
+		Point pt = new Point((pixel.getX() - layout.origin.getX()) / layout.size, //sizeX
+				 			 (pixel.getY() - layout.origin.getY()) / layout.size); //sizeY
 		double newX = o.b0 * pt.getX() + o.b1 * pt.getY();
 		double newY = o.b2 * pt.getX() + o.b3 * pt.getY();
 		

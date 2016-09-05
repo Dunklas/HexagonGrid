@@ -62,13 +62,33 @@ abstract class AbstractHexagon implements Hexagon {
 	}
 	
 	@Override
+	public Point getTopLeft(GridLayout layout) {
+		Point centre = getCentrePoint(layout);
+		
+		double top = centre.getY() - (getHeight(layout)/2);
+		double left = centre.getX() - (getWidth(layout)/2);
+		
+		return new Point(left, top);
+	}
+	
+	@Override
+	public double getWidth(GridLayout layout) {
+		return Math.sqrt(3)/2 * getHeight(layout);
+	}
+	
+	@Override
+	public double getHeight(GridLayout layout) {
+		return layout.size*2;
+	}
+	
+	@Override
 	public Point getCentrePoint(GridLayout layout) {
 		if (layout == null) throw new NullPointerException();
 		
 		HexagonOrientation o = this.orientation;
 		Coordinate c = this.coordinate;
-		double xCord = (o.f0 * c.getX() + o.f1 * c.getY()) * layout.sizeX;
-		double yCord = (o.f2 * c.getX() + o.f3 * c.getY()) * layout.sizeY;
+		double xCord = (o.f0 * c.getX() + o.f1 * c.getY()) * layout.size; //sizeX
+		double yCord = (o.f2 * c.getX() + o.f3 * c.getY()) * layout.size; //sizeY
 		return new Point(xCord + layout.origin.getX(), yCord + layout.origin.getY());
 	}
 	
@@ -77,7 +97,7 @@ abstract class AbstractHexagon implements Hexagon {
 		if (corner < 0 || corner > 5) throw new IllegalArgumentException();
 		
 		double angle = 2.0 * Math.PI * (orientation.startAngle - corner) / 6;
-		return new Point(layout.sizeX * Math.cos(angle), layout.sizeY * Math.sin(angle));
+		return new Point(layout.size * Math.cos(angle), layout.size * Math.sin(angle)); // first size X, second size Y
 	}
 	
 	HexagonOrientation getOrientation() {

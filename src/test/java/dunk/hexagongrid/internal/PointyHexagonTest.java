@@ -37,7 +37,7 @@ public final class PointyHexagonTest {
 	
 	@Test
 	public void getPointsShouldReturnProperPoints() {
-		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
+		GridLayout layout = new GridLayout(1024/2, 768/2, 60);
 		List<Point> expectedPoints = new ArrayList<>();
 		expectedPoints.add(new Point(563.9615242270663, 414.0));
 		expectedPoints.add(new Point(563.9615242270663, 354.0));

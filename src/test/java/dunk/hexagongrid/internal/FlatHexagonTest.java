@@ -37,7 +37,7 @@ public final class FlatHexagonTest {
 	
 	@Test
 	public void getPointsShouldReturnProperPoints() {
-		GridLayout layout = new GridLayout(1024/2, 768/2, 60, 60);
+		GridLayout layout = new GridLayout(1024/2, 768/2, 60);
 		List<Point> expectedPoints = new ArrayList<>();
 		expectedPoints.add(new Point(572.0, 384.0));
 		expectedPoints.add(new Point(542.0, 332.0384757729337));

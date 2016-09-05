@@ -29,11 +29,11 @@ public interface Hexagon {
 	
 	
 	/**
-	 * Returns a {@code Set} of {@code Point}s which represents the corners of this {@code Hexagon}. 
+	 * Returns a {@code List} of {@code Point}s which represents the corners of this {@code Hexagon}. 
 	 * The {@link Point}s may be used to draw the {@code Hexagon}.
 	 * 
 	 * @param layout  represents the size and position of a {@link Grid}, not null
-	 * @return a {@code Set} of {@code Point}s which represents the corners of this {@code Hexagon}
+	 * @return a {@code List} of {@code Point}s which represents the corners of this {@code Hexagon}
 	 */
 	List<Point> 	getPoints(GridLayout layout);
 	
@@ -46,6 +46,29 @@ public interface Hexagon {
 	 */
 	Point				getCentrePoint(GridLayout layout);
 	
+	
+	
+	/**
+	 * Returns a {@code Point} which represent the top left corner of the surrounding box.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 * @return a {@code Point} which represent the top left corner of the surrounding box
+	 */
+	Point		getTopLeft(GridLayout layout);
+	
+	/**
+	 * Returns a double representing the width of this {@code Hexagon}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 */
+	double		getWidth(GridLayout layout);
+	
+	/**
+	 * Returns a double representing the height of this {@code Hexagon}.
+	 * 
+	 * @param layout  represents the size and position of a {@link Grid}, not null
+	 */
+	double		getHeight(GridLayout layout);
 	
 	/**
 	 * Returns a {@code Vertice} in the specified {@code direction}.

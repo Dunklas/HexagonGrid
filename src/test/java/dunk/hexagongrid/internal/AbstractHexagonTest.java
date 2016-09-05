@@ -40,7 +40,7 @@ public final class AbstractHexagonTest {
 	@Test
 	public void getCentrePointShouldReturnProperPoint() {
 		for (int i = 30; i <= 90; i+=30) {
-			GridLayout layout = new GridLayout(1024/2, 768/2, i, i);
+			GridLayout layout = new GridLayout(1024/2, 768/2, i);
 			Point p = grid.getHexagon(Coordinate.from(0, 0)).getCentrePoint(layout);
 			assertEquals(p.getX(), 1024/2, 0.001);
 			assertEquals(p.getY(), 768/2, 0.001);
