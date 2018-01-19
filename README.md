@@ -27,5 +27,4 @@ Typical usage:
 
   This example would render the following grid (displayed in a simple Swing GUI): 
   
-  ![Image of grid]
-  (https://github.com/Dunklas/HexagonGrid/blob/master/grid.png)
+  ![Image of grid](https://raw.githubusercontent.com/Dunklas/HexagonGrid/master/grid.png)
