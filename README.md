@@ -28,4 +28,4 @@ Typical usage:
   This example would render the following grid (displayed in a simple Swing GUI): 
   
   ![Image of grid]
-  (grid.png)
+  (https://github.com/Dunklas/HexagonGrid/blob/master/grid.png)
