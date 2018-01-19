@@ -1,6 +1,6 @@
 # HexagonGrid
 
-A library for creating grids of hexagons. May be rendered on a canvas or similar.
+A library for creating grids of hexagons. May be rendered on a canvas or similar. I've only implemented grids in a hexagonal formation so far. I've taken a lot of inspiration from the blog posts at: https://www.redblobgames.com/grids/hexagons/ to write this library.
 
 Typical usage:
 
